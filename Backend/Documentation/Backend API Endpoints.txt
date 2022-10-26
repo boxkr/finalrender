@@ -89,3 +89,6 @@
 
 /api/Login
   - POST: Takes Username and Password keys in JSON message body. Returns success or failure
+
+/api/Register
+  - POST: Takes Username and Password keys in JSON message body. Returns success or failure

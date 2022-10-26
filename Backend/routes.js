@@ -269,10 +269,16 @@ router.post('/FinalizeOrder', function(req, res, next) {
 });
 
 router.post('/Login', function(req, res, next) {
-  res.send('respond with a resource');
+  client.query('SELECT * FROM InventoryHistory WHERE username=$1 AND password=$2', [req.query.username, req.query.password], (error, results) => {
+    if (error) { throw error; }
+    //TODO: If result.rows.length is 0, send failure.
+    response.sendStatus(200).json(results.rows);
+  });
 });
 
+router.post('/Register', function(req, res, next) {
 
+});
 
 
 
