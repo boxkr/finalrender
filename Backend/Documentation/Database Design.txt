@@ -7,7 +7,7 @@ Inventory
 -WholesaleCost: float
 -Minimum: integer
 
-OrderSizes
+Sizes
 -ID: integer
 -Name: text
 -NumSides: int

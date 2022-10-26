@@ -77,41 +77,41 @@ router.delete('/Inventory/:id', function(req, res, next) {
 
 
 
-/* OrderSizes */
-router.get('/OrderSizes', function(req, res, next) {
-  client.query('SELECT * FROM OrderSizes', (error, results) => {
+/* Sizes */
+router.get('/Sizes', function(req, res, next) {
+  client.query('SELECT * FROM Sizes', (error, results) => {
     if (error) { throw error; }
     response.sendStatus(200).json(results.rows);
   });
 });
 
-router.post('/OrderSizes', function(req, res, next) {
+router.post('/Sizes', function(req, res, next) {
   const { Name, NumSides, NumEntrees, Price } = req.body;
 
-  pool.query('INSERT INTO OrderSizes (Name, NumSides, NumEntrees, Price) VALUES ($1, $2, $3, $4)', [Name, NumSides, NumEntrees, Price], (error, results) => {
+  pool.query('INSERT INTO Sizes (Name, NumSides, NumEntrees, Price) VALUES ($1, $2, $3, $4)', [Name, NumSides, NumEntrees, Price], (error, results) => {
     if (error) { throw error; }
     response.status(201).send(`Row added with ID: ${results.rows[0].id}`)
   })
 });
 
-router.put('/OrderSizes', function(req, res, next) {
+router.put('/Sizes', function(req, res, next) {
   const { ID, Name, NumSides, NumEntrees, Price } = req.body;
-  const { query_string, new_values } = getUpdateQueryString('OrderSizes', ID , {"Name": Name, "NumSides": NumSides, "NumEntrees": NumEntrees, "Price": Price});
+  const { query_string, new_values } = getUpdateQueryString('Sizes', ID , {"Name": Name, "NumSides": NumSides, "NumEntrees": NumEntrees, "Price": Price});
   pool.query(query_string, new_values, (error, results) => {
     if (error) { throw error; }
     response.status(200).send('Row Updated')
   })
 });
 
-router.get('/OrderSizes/:id', function(req, res, next) {
-  client.query('SELECT * FROM OrderSizes WHERE id=$1', [req.params.id], (error, results) => {
+router.get('/Sizes/:id', function(req, res, next) {
+  client.query('SELECT * FROM Sizes WHERE id=$1', [req.params.id], (error, results) => {
     if (error) { throw error; }
     response.sendStatus(200).json(results.rows);
   });
 });
 
-router.delete('/OrderSizes/:id', function(req, res, next) {
-  client.query('DELETE FROM OrderSizes WHERE id=$1', [req.params.id], (error, results) => {
+router.delete('/Sizes/:id', function(req, res, next) {
+  client.query('DELETE FROM Sizes WHERE id=$1', [req.params.id], (error, results) => {
     if (error) { throw error; }
   });
   res.sendStatus(200);
@@ -251,6 +251,19 @@ router.delete('/InventoryHistory/:id', function(req, res, next) {
 
 
 /* Special Routes */
+
+/*Input: JSON array. Example below
+[
+  {
+    Size: "bowl",
+    Items: ["Orange Chicken", "Chow Mein"]
+  }, 
+  {
+    Size: "plate",
+    Items: ["Orange Chicken", "Orange Chicken", "Fried Rice"]
+  } 
+]
+*/
 router.post('/FinalizeOrder', function(req, res, next) {
   res.send('respond with a resource');
 });
