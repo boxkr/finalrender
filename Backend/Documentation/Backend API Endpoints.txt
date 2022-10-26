@@ -1,0 +1,87 @@
+// Explanation:  /api/Inventory means that you can send a request to http://localhost:3000/api/Inventory
+//
+// GET = HTTP GET request
+// POST = HTTP POST request (for adding new resources). Uses JSON format object in message body for new row data excluding ID. Ex. {Name: ChickenTaco, ItemType: entree, Calories: 200, Quantity: 500, WholesaleCost: 1.5, Minimum: 150}
+// PUT = HTTP PUT request (for updating a resource). Uses JSON format object in message body with keys for ID and any columns to be updated. Ex. {ID: 2, Quantity: 50} updates Quantity to 50 for item with ID 2
+// DELETE = HTTP DELETE request
+//
+//
+// Example: 
+// /api/ImaginaryLol
+//   - GET: Retrieves contents of ImaginaryLol table
+//   - POST: Adds a new row to the ImaginaryLol table
+//
+// The above means that if you send a GET request to http://localhost:3000/api/ImaginaryLol, 
+// the backend server will retrieve the contents of the ImaginaryLol table and send them back 
+// to you. If you send a POST request to that same URL and include a new row's data in the 
+// body of the request, the backend server will try to add the new row and send an HTTP response 
+// back to you indicating success or failure. 
+//
+
+
+
+/api/Inventory
+  - GET: Retrieves contents of Inventory table
+  - POST: Adds a new item to the Inventory table
+  - PUT: Updates an item in the Inventory table
+
+/api/Inventory/{id}
+  - DELETE: Deletes an item from the Inventory table with that ID
+
+
+
+
+
+/api/OrderSizes
+  - GET: Retrieves contents of OrderSizes table
+  - POST: Adds a new size to the OrderSizes table
+  - PUT: Updates a size in the OrderSizes table
+
+/api/OrderSizes/{id}
+  - DELETE: Deletes a size from the OrderSizes table with that ID
+
+
+
+
+
+/api/OrderHistory
+  - GET: Retrieves contents of OrderHistory table
+  - POST: Adds a new order to the OrderHistory table
+  - PUT: Updates an order in the OrderHistory table
+
+/api/OrderHistory/{id}
+  - DELETE: Deletes an order from the OrderHistory table with that ID
+
+
+
+
+
+/api/Employees
+  - GET: Retrieves contents of Employees table
+  - POST: Adds a new employee to the Employees table
+  - PUT: Updates an employee in the Employees table
+
+/api/Employees/{id}
+  - DELETE: Deletes an employee from the Employees table with that ID
+
+
+
+
+
+/api/InventoryHistory
+  - GET: Retrieves contents of InventoryHistory table
+  - POST: Adds a new entry to the InventoryHistory table
+  - PUT: Updates an entry in the InventoryHistory table
+
+/api/InventoryHistory/{id}
+  - DELETE: Deletes an entry from the InventoryHistory table with that ID
+
+
+
+
+
+/api/FinalizeOrder
+  - POST: Adds row to OrderHistory and updates quantity in Inventory
+
+/api/login
+  - POST: Takes Username and Password keys in JSON message body. Returns success or failure

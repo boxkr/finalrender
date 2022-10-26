@@ -1,0 +1,35 @@
+Inventory
+-ID: integer
+-Name: text
+-ItemType: text
+-Calories: integer
+-Quantity: integer
+-WholesaleCost: float
+-Minimum: integer
+
+OrderSizes
+-ID: integer
+-Name: text
+-NumSides: int
+-NumEntrees: int
+-Price: float
+
+Orders
+-ID: integer
+-CustomerName: text
+-ServerName: text
+-Date: date
+-OrderDetails: text
+-TotalPrice: float
+
+Employees
+-ID: integer
+-Name: text
+-Role: text
+-Username: text
+-Password: text
+
+InventoryHistory
+-ID: integer
+-Date: date
+-CurrentInventory: text
