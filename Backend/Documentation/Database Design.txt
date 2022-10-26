@@ -14,7 +14,7 @@ OrderSizes
 -NumEntrees: int
 -Price: float
 
-Orders
+OrderHistory
 -ID: integer
 -CustomerName: text
 -ServerName: text
