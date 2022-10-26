@@ -16,11 +16,11 @@ OrderSizes
 
 OrderHistory
 -ID: integer
--CustomerName: text
--ServerName: text
 -Date: date
--OrderDetails: text
+-ServerName: text
+-CustomerName: text
 -TotalPrice: float
+-OrderDetails: text
 
 Employees
 -ID: integer
