@@ -1,3 +1,8 @@
+Granting permissions
+GRANT ALL PRIVILEGES ON "inventory" TO PUBLIC;
+
+
+
 Inventory
 -ID: integer
 -Name: text
@@ -7,12 +12,38 @@ Inventory
 -WholesaleCost: float
 -Minimum: integer
 
+CREATE TABLE Inventory (
+    ID SERIAL PRIMARY KEY,
+    Name text NOT NULL,
+    ItemType text NOT NULL,
+    Calories int NOT NULL,
+    Quantity int NOT NULL,
+    WholesaleCost float NOT NULL,
+    Minimum int NOT NULL
+);
+
+
+
+
+
 Sizes
 -ID: integer
 -Name: text
 -NumSides: int
 -NumEntrees: int
 -Price: float
+
+CREATE TABLE Sizes (
+    ID SERIAL PRIMARY KEY,
+    Name text NOT NULL,
+    NumSides int NOT NULL,
+    NumEntrees int NOT NULL,
+    Price float NOT NULL
+);
+
+
+
+
 
 OrderHistory
 -ID: integer
@@ -22,6 +53,19 @@ OrderHistory
 -TotalPrice: float
 -OrderDetails: text
 
+CREATE TABLE OrderHistory (
+    ID SERIAL PRIMARY KEY,
+    Date date NOT NULL,
+    ServerName text NOT NULL,
+    CustomerName text NOT NULL,
+    TotalPrice float NOT NULL,
+    OrderDetails text NOT NULL
+);
+
+
+
+
+
 Employees
 -ID: integer
 -Name: text
@@ -29,7 +73,46 @@ Employees
 -Username: text
 -Password: text
 
+CREATE TABLE Employees (
+    ID SERIAL PRIMARY KEY,
+    Name text NOT NULL,
+    Role text NOT NULL,
+    Username text NOT NULL,
+    Password text NOT NULL
+);
+
+
+
+
+
 InventoryHistory
 -ID: integer
 -Date: date
 -CurrentInventory: text
+
+CREATE TABLE InventoryHistory (
+    ID SERIAL PRIMARY KEY,
+    Date date NOT NULL,
+    CurrentInventory text NOT NULL
+);
+
+
+
+
+
+CustomerAccounts
+-ID: integer
+-FirstName: text
+-LastName: text
+-Username: text
+-Password: text
+-CustomerPoints: integer
+
+CREATE TABLE CustomerAccounts (
+    ID SERIAL PRIMARY KEY,
+    FirstName text NOT NULL,
+    LastName text NOT NULL,
+    Username text NOT NULL,
+    Password text NOT NULL,
+    CustomerPoints int NOT NULL
+);

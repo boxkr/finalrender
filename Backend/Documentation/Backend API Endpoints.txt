@@ -87,8 +87,11 @@
 /api/FinalizeOrder
   - POST: Adds row to OrderHistory and updates quantity in Inventory
 
-/api/Login
+/api/EmployeeLogin
   - POST: Takes Username and Password keys in JSON message body. Returns success or failure
 
-/api/Register
+/api/CustomerLogin
+  - POST: Takes Username and Password keys in JSON message body. Returns success or failure
+
+/api/RegisterCustomerAccount
   - POST: Takes Username and Password keys in JSON message body. Returns success or failure
