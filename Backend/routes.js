@@ -310,7 +310,7 @@ router.post('/EmployeeLogin', function(req, res, next) {
     if (error) { throw error; }
 
     if (results.rows.length == 1) {
-      res.sendStatus(200);
+      res.status(200).json(results.rows[0]);
     } 
     else {
       res.sendStatus(401);
@@ -324,7 +324,7 @@ router.post('/CustomerLogin', function(req, res, next) {
     if (error) { throw error; }
 
     if (results.rows.length == 1) {
-      res.sendStatus(200);
+      res.status(200).json(results.rows[0]);
     } 
     else {
       res.sendStatus(401);
@@ -333,8 +333,22 @@ router.post('/CustomerLogin', function(req, res, next) {
 });
 
 router.post('/RegisterCustomerAccount', function(req, res, next) {
+  const { FirstName, LastName, Username, Password } = req.body;
+
   //Check if username is unique
-  //Create new account
+  client.query('SELECT * FROM CustomerAccounts WHERE username=$1', [Username], (error, results) => {
+    if (error) { throw error; }
+
+    if (results.rows.length > 0) {
+      res.sendStatus(409);
+    } 
+    else { //Create new account
+      client.query('INSERT INTO CustomerAccounts (FirstName, LastName, Username, Password, CustomerPoints) VALUES ($1, $2, $3, $4, 0)', [FirstName, LastName, Username, Password], (error, results) => {
+        if (error) { throw error; }
+        res.sendStatus(201);
+      })
+    }
+  });
 });
 
 
