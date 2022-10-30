@@ -305,18 +305,30 @@ router.post('/FinalizeOrder', function(req, res, next) {
 });
 
 router.post('/EmployeeLogin', function(req, res, next) {
-  client.query('SELECT * FROM Employees WHERE username=$1 AND password=$2', [req.query.username, req.query.password], (error, results) => {
+  const { Username, Password } = req.body;
+  client.query('SELECT * FROM Employees WHERE username=$1 AND password=$2', [Username, Password], (error, results) => {
     if (error) { throw error; }
-    //TODO: If result.rows.length is 0, send failure.
-    res.status(200).json(results.rows);
+
+    if (results.rows.length == 1) {
+      res.sendStatus(200);
+    } 
+    else {
+      res.sendStatus(401);
+    }
   });
 });
 
 router.post('/CustomerLogin', function(req, res, next) {
-  client.query('SELECT * FROM CustomerAccounts WHERE username=$1 AND password=$2', [req.query.username, req.query.password], (error, results) => {
+  const { Username, Password } = req.body;
+  client.query('SELECT * FROM CustomerAccounts WHERE username=$1 AND password=$2', [Username, Password], (error, results) => {
     if (error) { throw error; }
-    //TODO: If result.rows.length is 0, send failure.
-    res.status(200).json(results.rows);
+
+    if (results.rows.length == 1) {
+      res.sendStatus(200);
+    } 
+    else {
+      res.sendStatus(401);
+    }
   });
 });
 

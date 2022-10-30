@@ -22,6 +22,8 @@ CREATE TABLE Inventory (
     Minimum int NOT NULL
 );
 
+\copy Inventory(name, itemtype, calories, quantity, wholesalecost, minimum) from 'C:\Users\derek\Downloads\Inventory.csv' WITH DELIMITER ',' CSV HEADER;
+
 
 
 
@@ -40,6 +42,8 @@ CREATE TABLE Sizes (
     NumEntrees int NOT NULL,
     Price float NOT NULL
 );
+
+\copy Sizes(name, numsides, numentrees, price) from 'C:\Users\derek\Downloads\Sizes.csv' WITH DELIMITER ',' CSV HEADER;
 
 
 
@@ -81,6 +85,8 @@ CREATE TABLE Employees (
     Password text NOT NULL
 );
 
+\copy Employees(name, role, username, password) from 'C:\Users\derek\Downloads\Employees.csv' WITH DELIMITER ',' CSV HEADER;
+
 
 
 
@@ -116,3 +122,5 @@ CREATE TABLE CustomerAccounts (
     Password text NOT NULL,
     CustomerPoints int NOT NULL
 );
+
+\copy CustomerAccounts(firstname, lastname, username, password, customerpoints) from 'C:\Users\derek\Downloads\CustomerAccounts.csv' WITH DELIMITER ',' CSV HEADER;
