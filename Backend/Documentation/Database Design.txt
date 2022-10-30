@@ -1,0 +1,126 @@
+Granting permissions
+GRANT ALL PRIVILEGES ON "inventory" TO PUBLIC;
+
+
+
+Inventory
+-ID: integer
+-Name: text
+-ItemType: text
+-Calories: integer
+-Quantity: integer
+-WholesaleCost: float
+-Minimum: integer
+
+CREATE TABLE Inventory (
+    ID SERIAL PRIMARY KEY,
+    Name text NOT NULL,
+    ItemType text NOT NULL,
+    Calories int NOT NULL,
+    Quantity int NOT NULL,
+    WholesaleCost float NOT NULL,
+    Minimum int NOT NULL
+);
+
+\copy Inventory(name, itemtype, calories, quantity, wholesalecost, minimum) from 'C:\Users\derek\Downloads\Inventory.csv' WITH DELIMITER ',' CSV HEADER;
+
+
+
+
+
+Sizes
+-ID: integer
+-Name: text
+-NumSides: int
+-NumEntrees: int
+-Price: float
+
+CREATE TABLE Sizes (
+    ID SERIAL PRIMARY KEY,
+    Name text NOT NULL,
+    NumSides int NOT NULL,
+    NumEntrees int NOT NULL,
+    Price float NOT NULL
+);
+
+\copy Sizes(name, numsides, numentrees, price) from 'C:\Users\derek\Downloads\Sizes.csv' WITH DELIMITER ',' CSV HEADER;
+
+
+
+
+
+OrderHistory
+-ID: integer
+-Date: date
+-ServerName: text
+-CustomerName: text
+-TotalPrice: float
+-OrderDetails: text
+
+CREATE TABLE OrderHistory (
+    ID SERIAL PRIMARY KEY,
+    Date date NOT NULL,
+    ServerName text NOT NULL,
+    CustomerName text NOT NULL,
+    TotalPrice float NOT NULL,
+    OrderDetails text NOT NULL
+);
+
+
+
+
+
+Employees
+-ID: integer
+-Name: text
+-Role: text
+-Username: text
+-Password: text
+
+CREATE TABLE Employees (
+    ID SERIAL PRIMARY KEY,
+    Name text NOT NULL,
+    Role text NOT NULL,
+    Username text NOT NULL,
+    Password text NOT NULL
+);
+
+\copy Employees(name, role, username, password) from 'C:\Users\derek\Downloads\Employees.csv' WITH DELIMITER ',' CSV HEADER;
+
+
+
+
+
+InventoryHistory
+-ID: integer
+-Date: date
+-CurrentInventory: text
+
+CREATE TABLE InventoryHistory (
+    ID SERIAL PRIMARY KEY,
+    Date date NOT NULL,
+    CurrentInventory text NOT NULL
+);
+
+
+
+
+
+CustomerAccounts
+-ID: integer
+-FirstName: text
+-LastName: text
+-Username: text
+-Password: text
+-CustomerPoints: integer
+
+CREATE TABLE CustomerAccounts (
+    ID SERIAL PRIMARY KEY,
+    FirstName text NOT NULL,
+    LastName text NOT NULL,
+    Username text NOT NULL,
+    Password text NOT NULL,
+    CustomerPoints int NOT NULL
+);
+
+\copy CustomerAccounts(firstname, lastname, username, password, customerpoints) from 'C:\Users\derek\Downloads\CustomerAccounts.csv' WITH DELIMITER ',' CSV HEADER;
