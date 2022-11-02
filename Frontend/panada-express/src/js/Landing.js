@@ -2,6 +2,8 @@ import React from 'react'
 import '../css/App.css';
 import { Link } from "react-router-dom";
 import logo from '../images/Panda-Express-Logo.png';
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.css';
 
 let welcome = "Welcome To Panda Express";
 
@@ -13,12 +15,13 @@ export default function Landing() {
         <p className="welcome">
           {welcome}
         </p>
-        <button> {/*just need to add style with tailwind or bootstrap */}
-          <Link to="/login">Login</Link>
-        </button>
-        <button> {/*just need to add style with tailwind or bootstrap */}
-          <Link to="/size">Order Now!</Link>
-        </button>
+        <Button variant="primary" size="lg"> {' '}
+          <Link className='button-text' to="/login">Login</Link>
+        </Button>
+        <br></br>
+        <Button variant="primary" size="lg"> {/*just need to add style with tailwind or bootstrap */}
+          <Link className='button-text' to="/size">Order Now!</Link>
+        </Button>
       </header>
     </div>
   )
