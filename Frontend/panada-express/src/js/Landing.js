@@ -12,15 +12,16 @@ export default function Landing() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <br></br>
         <p className="welcome">
           {welcome}
         </p>
         <Button variant="primary" size="lg"> {' '}
-          <Link className='button-text' to="/login">Login</Link>
+          <Link className='button-text' style={{ textDecoration: 'none' }} to="/login">Login</Link>
         </Button>
         <br></br>
         <Button variant="primary" size="lg"> {/*just need to add style with tailwind or bootstrap */}
-          <Link className='button-text' to="/size">Order Now!</Link>
+          <Link className='button-text' style={{ textDecoration: 'none' }} to="/size">Order Now!</Link>
         </Button>
       </header>
     </div>
