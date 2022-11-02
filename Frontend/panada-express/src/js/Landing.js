@@ -16,13 +16,13 @@ export default function Landing() {
         <p className="welcome">
           {welcome}
         </p>
-        <Button variant="primary" size="lg"> {' '}
-          <Link className='button-text' style={{ textDecoration: 'none' }} to="/login">Login</Link>
-        </Button>
+        <Link className='button-text' to="/Login"><Button variant="primary">
+            Login</Button>
+          </Link>
         <br></br>
-        <Button variant="primary" size="lg"> {/*just need to add style with tailwind or bootstrap */}
-          <Link className='button-text' style={{ textDecoration: 'none' }} to="/size">Order Now!</Link>
-        </Button>
+        <Link className='button-text' to="/size"><Button variant="primary">
+            Order Now!</Button>
+          </Link>
       </header>
     </div>
   )
