@@ -1,0 +1,25 @@
+WEDNESDAY 11/2/2022 LAB
+
+AGENDA:
+
+    -Go through see how everyone is doing
+    -Talk about where we need to be at the end of the sprint
+    
+WILLIAM:
+
+    -Doing good, researching and setting up React to do frontend stuff for the direct customer-facing things
+
+BRANDON:
+
+    -Building frontend for login page, no OAUTH yet just the overall flow
+
+DEREK:
+
+    -Rebuilding our backend code in javascript from java
+    -Will be creating routes in Express soon
+
+KEEGAN:
+
+    -Was gone all weekend, couldn't get a lot going. Want to get with William to and split some work for the customer-facing portion
+    -Keeping track of scrum stuff
+
