@@ -1,13 +1,27 @@
-import React from 'react'
-import { Link, useLocation } from "react-router-dom"
+import React, { useEffect } from 'react'
+import { Link } from "react-router-dom"
 
-let order = {};
+async function populate(items){
+    items = await getResponse();
+    // console.log(items);
+    return items
+}
+
+async function getResponse(){
+    let response;
+    const res = await fetch("http://localhost:3000/api/inventory");
+    response = res.json();
+    // console.log(response);
+    return response;
+}
+
 export default function Size() {
-  const location = useLocation()
-
+    var items;
+    items = getResponse();
+    console.log(items.resolve());
   return (
     <div>
-        <h1>Choose your size</h1>
+        <h1>Choose your size</h1> 
         <button>
             <Link to='/'>Previous</Link>
         </button>
