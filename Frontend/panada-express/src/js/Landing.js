@@ -2,8 +2,9 @@ import React from 'react'
 import '../css/App.css';
 import { Link } from "react-router-dom";
 import logo from '../images/Panda-Express-Logo.png';
-import Button from 'react-bootstrap/Button';
-import 'bootstrap/dist/css/bootstrap.css';
+import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
+import {Button} from 'react-bootstrap';
+
 
 let welcome = "Welcome To Panda Express";
 
