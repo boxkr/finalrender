@@ -13,3 +13,7 @@
 html{
     background-color: #C02827;
 }
+
+.create-account-text{
+    font-size: calc(5px + 2vmin);;
+}

@@ -27,6 +27,10 @@ export default function Login() {
                 }
             </div>
         </form>
+        <p className='create-account-text'>
+          Dont have a Panda Express acount? <br></br>
+          <Link className='button-text'to="/createaccount">Click here to create one.</Link>
+        </p>
         <p className='return'>
           <br></br>
           <br></br>
