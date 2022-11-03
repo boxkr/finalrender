@@ -1,32 +1,33 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
 
-async function populate(items){
-    items = await getResponse();
-    // console.log(items);
-    return items
-}
-
-async function getResponse(){
-    let response;
-    const res = await fetch("http://localhost:3000/api/inventory");
-    response = res.json();
-    // console.log(response);
-    return response;
-}
 
 export default function Size() {
-    var items;
-    items = getResponse();
-    console.log(items.resolve());
+    const [sizes, setSizes] = useState(null);
+    useEffect(() => {
+        fetch("http://localhost:3000/api/Sizes")
+            .then((response) => response.json())
+            .then((data) => setSizes(data));
+    }, []);
+
   return (
     <div>
         <h1>Choose your size</h1> 
+        {/* {sizes.map((size) => (
+            <div key = {size.id}>
+                <div>{size.id}</div>
+                <div>{size.name}</div>
+                <div>{size.numSides}</div>
+                <div>{size.numEntrees}</div>
+                <div>{size.price}</div>
+            </div>
+        ))} */}
+        {console.log(sizes)}
         <button>
             <Link to='/'>Previous</Link>
         </button>
         <button> {/*just need to add style with tailwind or bootstrap */}
-            <Link to='/side1' state={order}>Next</Link>
+            <Link to='/side1'>Next</Link>
         </button>
     </div>
   )
