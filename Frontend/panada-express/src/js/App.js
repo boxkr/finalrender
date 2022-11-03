@@ -12,8 +12,6 @@ import Extra from "./Extra";
 import Drink from "./Drink";
 import FinalizeOrder from "./FinalizeOrder";
 
-let welcome = "Welcome To Panda Express";
-
 function App() {
   return (
     <div className="App">
