@@ -9,6 +9,7 @@ export default function Entree1() {
   return (
     <div>
         <h1>Choose your 1st Entree</h1>
+        
         <button>
             <Link to="/side2" state={order}>Previous</Link>
         </button>
