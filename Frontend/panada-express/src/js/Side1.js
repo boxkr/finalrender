@@ -29,7 +29,7 @@ export default function Side1() {
     let name = e.target.id;
     console.log(name,"Selected");
     let placeholder = order;
-    placeholder['side'] = name;
+    placeholder.smallOrder['side'] = name;
     updateOrder(placeholder);
     
 

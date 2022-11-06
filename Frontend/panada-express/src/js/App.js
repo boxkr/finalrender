@@ -11,6 +11,7 @@ import Entree3 from "./Entree3";
 import Extra from "./Extra";
 import Drink from "./Drink";
 import FinalizeOrder from "./FinalizeOrder";
+import Manager from "./Manager"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <Route path='/' element = {<Landing />}/>
               <Route path='/login' element = {<Login />} />
               <Route path='/createaccount' element = {<CreateAccount />} />
+              <Route path='/manager' element = {<Manager />} />
               <Route path='/size' element = {<Size />} />
               <Route path='/side1' element = {<Side1 />} />
               <Route path='/side2' element = {<Side2 />} />

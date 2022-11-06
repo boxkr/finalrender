@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from "react-router-dom"
+import { Link,Location, useLocation } from "react-router-dom"
 import '../css/order.css'
 
 
@@ -29,7 +29,7 @@ export default function Size() {
         let name = e.target.id;
         console.log(name,"Selected");
         let placeholder = order;
-        placeholder['size'] = name;
+        placeholder.smallOrder['size'] = name;
         updateOrder(placeholder);
         
 
@@ -48,11 +48,16 @@ export default function Size() {
     }
 
     /**
-     * These are state variables to hold the items from the api, the previous selected item, and our order object
+     * These are state variables to hold the items from the api, the previous selected item, and our order object both large and small
      */
+    const location = useLocation();
+    let passedInOrder = location.state;
     const [sizes, setSizes] = useState([]);
     const [lastSelectedButton, setLastUsedButton] = useState(null);
-    const [order,updateOrder] = useState({})
+    const [order,updateOrder] = useState({smallOrder: {}, largeOrder: (passedInOrder == undefined || passedInOrder == null) ? [] : passedInOrder.largeOrder})
+
+    
+    
 
     //calls our api, gets the json response for all the sizes
     useEffect(() => {
