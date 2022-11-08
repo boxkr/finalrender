@@ -5,13 +5,7 @@ import {Button} from 'react-bootstrap';
 
 
 
-const RestockInventory=()=>{
-    return(
-        <div>
-            <h1>Restock Inventory placeholder</h1>
-        </div>
-    )
-}
+
 
 
 
@@ -22,20 +16,41 @@ export default function InventoryManagementPopup(props) {
     }
 
     const [fullInventory, setFullInventory] = useState([]);
+    const [restockItem, setRestockItem] = useState("");
+    const [restockAmount, setRestockAmount] = useState("");
+
     useEffect(() => {
         fetch("http://localhost:3000/api/Inventory")
             .then((response) => response.json())
             .then((data) => setFullInventory(data)); 
     }, []);
 
+    const handleRestock=(e)=>{
+        e.preventDefault();
+        console.log("Restock called.","Item: "+restockItem,"Amount: "+restockAmount)
+
+        //fetch post to /inventory
+    }
     
-    console.log(fullInventory);
     
     return (
         <div className="management-container">
             <Button onClick={handleClose}>Close</Button>
             <h1 className="management-header">Inventory Management</h1>
-            <RestockInventory/>
+            <div className='restock-view'>
+                <form>
+                    <div className='restock-field'>
+                        <label className='restock-text' >Item Name: </label>
+                        <input value={restockItem} onChange={(e)=>{setRestockItem(e.target.value)}} type='text' id='item-name'/>
+                    </div>
+                    <div className='restock-field'>
+                        <label className='restock-text' >Item Amount: </label>
+                        <input value={restockAmount} onChange={(e)=>{setRestockAmount(e.target.value)}} type='text' id='item-amount'/>
+                    </div>
+                    <input onClick={handleRestock} type='submit' value="Submit Restock Request"/>
+
+                </form>
+            </div>
             <div className="inventory-view">
                 {fullInventory.map((item) => (
                     <div id={item.name} key={item.id}>
