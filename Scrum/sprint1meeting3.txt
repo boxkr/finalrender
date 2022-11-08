@@ -1,0 +1,33 @@
+MONDAY 11/7/2022
+
+AGENDA:
+
+    -Personal updates
+    -Where are we, what do we need to do in the next 24 hours to get done
+    -Next spring ideas?
+
+BRANDON:
+
+    -Creating Manager login page, hooking it up naively for user-feedback. Will deal with OAUTH next sprint because with that
+    comes a lot of other issues like dealing with private routes etc
+
+WILLIAM:
+
+    -Finishing populating the rest of the ordering pages
+
+DEREK:
+
+    -Working on the frontend with the view for finalizing an ordering
+
+KEEGAN:
+
+    -Working on manager view and functionalities
+
+WHERE WE AT:
+
+    -In a good spot, if everyone does what they say they will we will finish sprint one.
+    -Keegan needs to get things together to submit the written materials
+
+NEXT SPRINT:
+
+    API integration, make things prettier

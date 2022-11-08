@@ -36,3 +36,12 @@
 .invisible{
   display: none;
 }
+
+.inventory-view{
+  display: flex;
+  flex-direction: row;
+}
+
+.inventory-item{
+  color: black;
+}
