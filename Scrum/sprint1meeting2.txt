@@ -1,0 +1,28 @@
+FRIDAY 11/4/2022
+
+AGENDA:
+
+    -What is everyone doing
+    -Are we in good shape to get a basic function done by Tuesday?
+
+WILLIAM:
+
+    -Doing frontend things still, got the pages made and calling to our API to get the sizes so far, will continue for the other items
+
+BRANDON:
+
+    -Done with how to login looks, looking into OAUTH and it seems somewhat daunting
+
+DEREK:
+
+    -Went crazy, completed converting the backend to javascript
+    -Created routes in express to call the psql db. should be working now
+    -Going to dive into react over the weekend see if can help on frontend
+
+KEEGAN:
+
+    -Working on the "middleware" stuff, for example keeping track of an order throughout the whole process.
+    -Making good progress, things look like they're working
+    -Need to get on the burndown chart and PM things.
+
+Seem to be in decent shape for Tuesday, may need to work over the weekend and Monday to get things in a good spot.

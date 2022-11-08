@@ -65,6 +65,7 @@ CREATE TABLE OrderHistory (
     TotalPrice float NOT NULL,
     OrderDetails text NOT NULL
 );
+\copy OrderHistory(date, servername, customername, totalprice, orderdetails) from 'C:\Users\derek\Downloads\orderhistorydata.csv' WITH DELIMITER ',' CSV;
 
 
 
@@ -102,6 +103,7 @@ CREATE TABLE InventoryHistory (
     CurrentInventory text NOT NULL
 );
 
+\copy InventoryHistory(date, currentinventory) from 'C:\Users\derek\Downloads\inventoryhistorydata.csv' WITH DELIMITER ',' CSV;
 
 
 

@@ -270,11 +270,17 @@ router.delete('/InventoryHistory/:id', function(req, res, next) {
 }
 
 */
-router.post('/FinalizeOrder', function(req, res, next) {
+router.post('/FinalizeOrder', async function(req, res, next) {
   //OrderHistory Update
   const { ServerName, CustomerName, TotalPrice, OrderDetails } = req.body;
-  client.query('INSERT INTO OrderHistory (Date, ServerName, CustomerName, TotalPrice, OrderDetails) VALUES (CURRENT_DATE, $1, $2, $3, $4)', [ServerName, CustomerName, TotalPrice, OrderDetails], (error, results) => {
-    if (error) { throw error; }
+
+  await client.query('BEGIN');
+
+  await client.query('INSERT INTO OrderHistory (Date, ServerName, CustomerName, TotalPrice, OrderDetails) VALUES (CURRENT_DATE, $1, $2, $3, $4)', [ServerName, CustomerName, TotalPrice, OrderDetails], async (error, results) => {
+    if (error) { 
+      await client.query('ROLLBACK');
+      throw error; 
+    }
   });
 
   //Inventory Update
@@ -290,17 +296,23 @@ router.post('/FinalizeOrder', function(req, res, next) {
 
   for (const [item_name, count] of Object.entries(ordered_item_count)) {
     //Get current quantity of each item
-    client.query('SELECT * FROM Inventory WHERE Name=$1', [item_name], (select_error, select_results) => {
-      if (select_error) { throw select_error; }
-      //console.log(select_results);
+    await client.query('SELECT * FROM Inventory WHERE Name=$1', [item_name], async (select_error, select_results) => {
+      if (select_error) {
+        await client.query('ROLLBACK');
+        throw select_error; 
+      }
       
       //Update each item with new quantity
-      client.query("UPDATE Inventory SET Quantity=$1 WHERE Name=$2", [parseInt(select_results.rows[0].quantity) - count, item_name], (update_error, update_results) => {
-        if (update_error) { throw update_error; }
+      await client.query("UPDATE Inventory SET Quantity=$1 WHERE Name=$2", [parseInt(select_results.rows[0].quantity) - count, item_name], async (update_error, update_results) => {
+        if (update_error) {
+          await client.query('ROLLBACK');
+          throw update_error; 
+        }
       })
     });
   }
   
+  await client.query('COMMIT');
   res.status(201).send('Order finalized');
 });
 

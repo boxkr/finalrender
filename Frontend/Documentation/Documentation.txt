@@ -1,17 +1,23 @@
-  npm start
-    Starts the development server.
+npm start
+  For Mac OS & Linux:
+    Find package.json
+    Replace "start": "set PORT=3001 && react-scripts start" with "start": "PORT=3001 react-scripts start"
+  Starts the development server.
 
-  npm run build
-    Bundles the app into static files for production.
+npm run build
+  Bundles the app into static files for production.
 
-  npm test
-    Starts the test runner.
+npm test
+  Starts the test runner.
 
-  npm run eject
-    Removes this tool and copies build dependencies, configuration files
-    and scripts into the app directory. If you do this, you can’t go back!
+npm run eject
+  Removes this tool and copies build dependencies, configuration files
+  and scripts into the app directory. If you do this, you can’t go back!
 
 We suggest that you begin by typing:
-
   cd panada-express
   npm start
+
+The index.js initially loads App.js
+The App.js declares different pages & loads each of the components
+Other .js files are components of HTML that should be loaded
