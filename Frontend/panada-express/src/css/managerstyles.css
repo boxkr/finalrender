@@ -23,6 +23,7 @@
 
 .management-container{
   position: fixed;
+  display: block;
   height: 80vh;
   width: 80vw;
   background-color: #f1f1f1;
@@ -38,10 +39,31 @@
 }
 
 .inventory-view{
+
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .inventory-item{
   color: black;
+  
+  padding-right: 2.5px;
+  padding-left: 2.5px;
+}
+
+.restock-view{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+.restock-text{
+  color: black;
+}
+
+.restock-field{
+  margin-bottom: 5px;
 }
