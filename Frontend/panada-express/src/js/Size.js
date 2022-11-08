@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from "react-router-dom"
 // import '../css/Size.css';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
 import '../css/Ordering.css'
 
 

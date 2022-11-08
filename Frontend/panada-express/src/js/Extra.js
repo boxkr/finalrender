@@ -36,7 +36,7 @@ export default function Extra() {
     let name = e.target.id;
     console.log(name,"Selected");
     let placeholder = order;
-    placeholder.smallOrder['entree3'] = name;
+    placeholder.smallOrder['etc'] = name;
     updateOrder(placeholder);
     
 

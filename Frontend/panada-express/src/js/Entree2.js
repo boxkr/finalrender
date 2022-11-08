@@ -82,10 +82,20 @@ export default function Entree2() {
         <Link className='button-text' to="/entree1"><Button variant="primary">
             Previous</Button>
         </Link>
-        <Link className='button-text' to="/entree3"><Button variant="primary">
-            Next</Button>
-        </Link>
+        <Link className='button-text' to="/entree3" state={neworder}><Button variant="primary">
+          Next</Button>
+          </Link>
         </p>
+        {/* {
+          order.smallOrder.size == 'plate' ? 
+          <Link className='button-text' to="/extra" state={neworder}><Button variant="primary">
+          Next</Button>
+          </Link>
+          :
+          <Link className='button-text' to="/entree3" state={neworder}><Button variant="primary">
+          Next</Button>
+          </Link>
+        } */}
     </div>
   )
 }
