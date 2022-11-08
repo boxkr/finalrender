@@ -30,7 +30,7 @@ export default function FinalizeOrder() {
     <div>
         <h1>Your Order Summary</h1>
         <button>
-            <Link to="/drink" state={order}>Previous</Link>
+            <Link to="/extra" state={order}>Previous</Link>
         </button>
         <button> {/*just need to add style with tailwind or bootstrap */}
             <Link to="/size" onClick={handleOrderMore} state={order}>Order More</Link>

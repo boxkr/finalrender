@@ -29,7 +29,7 @@ export default function Side1() {
     let name = e.target.id;
     console.log(name,"Selected");
     let placeholder = order;
-    placeholder.smallOrder['side'] = name;
+    placeholder.smallOrder['side1'] = name;
     updateOrder(placeholder);
     
 
@@ -43,7 +43,7 @@ export default function Side1() {
   /**
      * These are state variables to hold the items from the api, the previous selected item, and our order object
   */
-  const [sides, setSides] = useState([]);
+  const [items, setItems] = useState([]);
   const [lastSelectedButton, setLastUsedButton] = useState(null);
   const [neworder,updateOrder] = useState({})
   
@@ -51,29 +51,29 @@ export default function Side1() {
     updateOrder(order);
     fetch("http://localhost:3000/api/Inventory")
         .then((response) => response.json())
-        .then((data) => setSides(data)); 
+        .then((data) => setItems(data)); 
   }, []);
 
 
   return (
     
-    <div>
+    <div className = 'centered-container'>
         <h1>Choose your 1st side</h1>
         <div className='top-level-item-render'>
-            {console.log(sides)}
-            {sides.map( (side) => {
+            {console.log(items)}
+            {items.map( (item) => {
               
               //we have grabbed the entire inventory, but we only want to render the sides on this particular page
-              if(side.itemtype != 'side'){
+              if(item.itemtype != 'side'){
                 return;
               }else{
                 return (
-                  <div id={side.name} className="item-button" onClick={handleItemAdd} key={side.id}>
-                    <p className='item-id non-clickable'>{side.id}</p>  
-                    <p className='non-clickable'>{side.name}</p>
-                    <p>{side.numSides}</p>
-                    <p>{side.numEntrees}</p>
-                    <p className='item-price non-clickable'>{side.price}</p>
+                  <div id={item.name} className="item-button" onClick={handleItemAdd} key={item.id}>
+                    <p className='item-id non-clickable'>{item.id}</p>  
+                    <p className='non-clickable'>{item.name}</p>
+                    <p>{item.numSides}</p>
+                    <p>{item.numEntrees}</p>
+                    <p className='item-price non-clickable'>{item.price}</p>
                   </div>
                   )
               }
