@@ -55,7 +55,9 @@ export default function Entree1() {
 
   return (
     <div className='centered-container'>
-        <h1>Choose your 1st Entree</h1>
+        {
+          order.smallOrder.size == 'bowl' ? <h1>Choose your Entree</h1> : <h1>Choose your 1st Entree</h1>
+        }
         <div className='top-level-item-render'>
           {items.map( (item) => {
               
@@ -75,12 +77,16 @@ export default function Entree1() {
               }
             })}
         </div>
-        <button>
-            <Link to="/side2" state={neworder}>Previous</Link>
-        </button>
-        <button> {/*just need to add style with tailwind or bootstrap */}
+        {
+          order.smallOrder.size == 'bowl' ? 
+          <button>
+            <Link to ="/extra" state={neworder}>Next</Link>
+          </button>
+          :
+          <button> {/*just need to add style with tailwind or bootstrap */}
             <Link to="/entree2" state={neworder}>Next</Link>
         </button>
+        }
     </div>
   )
 }

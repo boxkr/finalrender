@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { Link, useLocation } from "react-router-dom"
 import "../css/order.css"
+import Size from './Size'
 export default function Side1() {
   
   /** 
@@ -54,11 +55,12 @@ export default function Side1() {
         .then((data) => setItems(data)); 
   }, []);
 
-
   return (
     
     <div className = 'centered-container'>
-        <h1>Choose your 1st side</h1>
+        {
+          order.smallOrder.size == 'bowl' ? <h1>Choose your side</h1> : <h1>Choose your 1st side</h1>
+        }
         <div className='top-level-item-render'>
             {console.log(items)}
             {items.map( (item) => {
@@ -83,9 +85,16 @@ export default function Side1() {
         <button>
             <Link to="/size" state={neworder}>Previous</Link>
         </button>
-        <button> {/*just need to add style with tailwind or bootstrap */}
+        {
+          order.smallOrder.size == 'bowl' ? 
+          <button>
+            <Link to ="/entree1" state={neworder}>Next</Link>
+          </button>
+          :
+          <button> {/*just need to add style with tailwind or bootstrap */}
             <Link to="/side2" state={neworder}>Next</Link>
         </button>
+        }
     </div>
   )
 }

@@ -76,12 +76,16 @@ export default function Entree2() {
               }
             })}
         </div>
-        <button>
-          <Link to="/entree1" state={neworder}>Previous</Link>
+        {
+          order.smallOrder.size == 'plate' ? 
+          <button>
+            <Link to ="/extra" state={neworder}>Next</Link>
+          </button>
+          :
+          <button> {/*just need to add style with tailwind or bootstrap */}
+            <Link to="/entree3" state={neworder}>Next</Link>
         </button>
-        <button> {/*just need to add style with tailwind or bootstrap */}
-          <Link to="/entree3" state={neworder}>Next</Link>
-        </button>
+        }
     </div>
   )
 }
