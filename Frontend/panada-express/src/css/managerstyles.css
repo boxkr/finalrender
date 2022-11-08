@@ -64,6 +64,21 @@
   color: black;
 }
 
+.restock-header{
+  color: rgb(131, 0, 0);
+  margin-bottom: 15px;
+  margin-top: 20px
+}
+
 .restock-field{
   margin-bottom: 5px;
+}
+
+.sizes-view{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
 }
