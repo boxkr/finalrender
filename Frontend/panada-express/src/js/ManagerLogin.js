@@ -22,9 +22,9 @@ export default function ManagerLogin() {
             </label>
             <div>
               <br></br>
-                <Button variant="primary">Submit</Button>{
-                  //FIXME
-                }
+              <Link to="/manager"><Button variant="primary">
+              Submit</Button>
+              </Link>
             </div>
         </form>
         <p className='return'>

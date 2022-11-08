@@ -1,5 +1,7 @@
 import React from 'react'
 import {Link, useLocation} from "react-router-dom"
+import Button from 'react-bootstrap/Button'
+import '../css/Ordering.css'
 
 export default function FinalizeOrder() {
 
@@ -27,15 +29,19 @@ export default function FinalizeOrder() {
   
   console.log(order)
   return (
-    <div>
+    <div className='finalize'>
         <h1>Your Order Summary</h1>
-        <button>
-            <Link to="/extra" state={order}>Previous</Link>
-        </button>
-        <button> {/*just need to add style with tailwind or bootstrap */}
-            <Link to="/size" onClick={handleOrderMore} state={order}>Order More</Link>
-        </button>
-        <button onClick={handleFinalize}> Order Now </button>
+        <p>
+        <Link className='button-text' to="/extra"><Button variant="primary">
+            Previous</Button>
+        </Link>
+        <Link className='button-text' onClick={handleOrderMore} to="/size"><Button variant="primary">
+            Continue your order</Button>
+        </Link>
+        <Link className='button-text' onClick={handleFinalize}><Button variant="success">
+            Order Now</Button>
+        </Link>
+        </p>
     </div>
   )
 }

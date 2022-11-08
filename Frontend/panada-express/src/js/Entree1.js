@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import {Link, useLocation} from "react-router-dom"
 import "../css/order.css"
+import Button from 'react-bootstrap/Button'
+import '../css/Ordering.css'
 
 export default function Entree1() {
   const location = useLocation()
@@ -75,12 +77,14 @@ export default function Entree1() {
               }
             })}
         </div>
-        <button>
-            <Link to="/side2" state={neworder}>Previous</Link>
-        </button>
-        <button> {/*just need to add style with tailwind or bootstrap */}
-            <Link to="/entree2" state={neworder}>Next</Link>
-        </button>
+        <p>
+        <Link className='button-text' to="/side2"><Button variant="primary">
+            Previous</Button>
+        </Link>
+        <Link className='button-text' to="/entree2"><Button variant="primary">
+            Next</Button>
+        </Link>
+        </p>
     </div>
   )
 }
