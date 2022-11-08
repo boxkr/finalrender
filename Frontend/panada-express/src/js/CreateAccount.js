@@ -2,6 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import '../css/Login.css';
 import { Link } from "react-router-dom";
+import { Alert } from 'bootstrap';
 
 export default function CreateAccount() {
     return (
@@ -32,7 +33,7 @@ export default function CreateAccount() {
               <div>
                 <br></br>
                   <Button variant="primary">Submit</Button>{
-                    //FIXME
+                    
                   }
               </div>
           </form>

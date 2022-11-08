@@ -10,10 +10,15 @@
     color: white;
 }
 
-html{
+/* html{
     background-color: #C02827;
-}
+} */
 
 .create-account-text{
     font-size: calc(5px + 2vmin);;
+}
+
+.alt-login{
+    color: white;
+    font-size: calc(1px + 2vmin);
 }

@@ -4,10 +4,10 @@ import '../css/Login.css';
 import { Link } from "react-router-dom";
 
 
-export default function Login() {
+export default function ManagerLogin() {
   return (
     <div className='login-div'>
-        <h1>Login to your Panda Express account</h1>
+        <h1>Manager Login</h1>
         <br></br>
         <br></br>
         <form>
@@ -27,10 +27,6 @@ export default function Login() {
                 }
             </div>
         </form>
-        <p className='create-account-text'>
-          Dont have a Panda Express acount? <br></br>
-          <Link className='button-text'to="/createaccount">Click here to create one.</Link>
-        </p>
         <p className='return'>
           <br></br>
           <br></br>
@@ -41,7 +37,7 @@ export default function Login() {
           </Link>
           <br></br>
           <br></br>
-          <Link className='alt-login'to="/managerlogin">Click here to login as a manager.</Link>      
+          <Link className='alt-login'to="/login">Click here to return to customer login.</Link>  
         </p>
     </div>
   )

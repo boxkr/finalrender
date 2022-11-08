@@ -1,5 +1,6 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Login from "./Login";
+import ManagerLogin from "./ManagerLogin";
 import CreateAccount from "./CreateAccount";
 import Landing from "./Landing";
 import Size from "./Size";
@@ -21,6 +22,7 @@ function App() {
             <Routes>
               <Route path='/' element = {<Landing />}/>
               <Route path='/login' element = {<Login />} />
+              <Route path='/managerlogin' element = {<ManagerLogin />} />
               <Route path='/createaccount' element = {<CreateAccount />} />
               <Route path='/size' element = {<Size />} />
               <Route path='/side1' element = {<Side1 />} />
