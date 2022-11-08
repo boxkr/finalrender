@@ -22,9 +22,9 @@ export default function Login() {
             </label>
             <div>
               <br></br>
-                <Button variant="primary">Submit</Button>{
-                  //FIXME
-                }
+              <Link to="/size"><Button variant="primary">
+              Submit</Button>
+              </Link>
             </div>
         </form>
         <p className='create-account-text'>
