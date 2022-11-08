@@ -14,28 +14,59 @@ export default function FinalizeOrder() {
 
   const handleFinalize = () => {
 
-
     console.log("order finalized")
 
-    //add order to order history
-
-    //remove stuff from inventory
+    //backend API call
 
     //probably redirect to some page, maybe displaying how much you paid
 
   }
+
+  console.log(order);
+  let allItems = [...order.largeOrder];
+  allItems.push(order.smallOrder);
+
+  console.log(allItems)
+
+  for (let i = 0; i < allItems.length; i++) {
+    allItems[i].items_array = [];
+    for(const [key, value] of Object.entries(allItems[i])) {
+      if (key !== "size" && key !== "items_array") {
+        allItems[i].items_array.push(value + "\n");
+      }
+    }
+  }
+
+  console.log(allItems)
   
-  console.log(order)
+  const fullOrderDisplay = allItems.map((smallOrder, index1) => {
+    return (
+      <div key={index1}>
+        <h3> {smallOrder.size.toUpperCase()} </h3>
+        {
+          smallOrder.items_array.map((order_item, index2) => (
+            <p key={index2}>{order_item}</p>
+          ))
+        } 
+      </div>
+  )});
+
+
+  
+  console.log(fullOrderDisplay)
+
   return (
     <div>
         <h1>Your Order Summary</h1>
         <button>
             <Link to="/extra" state={order}>Previous</Link>
         </button>
+        
         <button> {/*just need to add style with tailwind or bootstrap */}
             <Link to="/size" onClick={handleOrderMore} state={order}>Order More</Link>
         </button>
         <button onClick={handleFinalize}> Order Now </button>
+        { fullOrderDisplay }
     </div>
   )
 }
