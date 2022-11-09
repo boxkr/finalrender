@@ -57,7 +57,6 @@ export default function Side1() {
         .then((data) => setItems(data)); 
   }, []);
 
-
   return (
     
     <div className = 'centered-container'>
