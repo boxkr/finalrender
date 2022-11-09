@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from "react-router-dom"
-import '../css/Size.css';
+// import '../css/Size.css';
 import Button from 'react-bootstrap/Button';
-
+import '../css/Ordering.css'
 
 
 export default function Size() {
@@ -84,12 +84,14 @@ export default function Size() {
                 </div>
             ))}
         </div>
-        <button>
-            <Link to='/'>Go Back Home</Link>
-        </button>
-        <button> {/*just need to add style with tailwind or bootstrap */}
-            <Link onClick={verifyValidContinue} to='/side1' state={order}>Next</Link>
-        </button>
+        <Link className='button-text' to="/side1"><Button variant="primary">
+            Next</Button>
+        </Link>
+
+        <br></br>
+        <Link className='button-text' style={{ textDecoration: 'none' }} to="/"><Button variant="secondary">
+            Return to landing page</Button>
+        </Link>
     </div>
   )
 }

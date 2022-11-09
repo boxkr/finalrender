@@ -1,0 +1,24 @@
+html{
+    background-color: #C02827;
+}
+
+.centered-container{
+    background-color:#C02827 !important; 
+}
+
+.top-level-item-render{
+    background-color: #C02827 !important;
+}   
+
+h1 {
+    color: white;
+    background-color: #C02827;
+}
+
+.button-text{
+    padding: 15px;
+}
+
+.finalize{
+    background-color: #C02827;
+}

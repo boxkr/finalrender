@@ -118,6 +118,7 @@ export default function MenuManagementPopup(props) {
 
     console.log(currentSizes)
     console.log(currentInventory)
+
     return (
         <div className="management-container">
             <Button onClick={handleClose}>Close</Button>

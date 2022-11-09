@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import { Link, useLocation } from "react-router-dom"
 import "../css/order.css"
+import Button from 'react-bootstrap/Button'
+import '../css/Ordering.css'
 import Size from './Size'
 export default function Side1() {
   
@@ -58,9 +60,10 @@ export default function Side1() {
   return (
     
     <div className = 'centered-container'>
-        {
+        <h1>Choose your 1st side</h1>
+        {/* {
           order.smallOrder.size == 'bowl' ? <h1>Choose your side</h1> : <h1>Choose your 1st side</h1>
-        }
+        } */}
         <div className='top-level-item-render'>
             {console.log(items)}
             {items.map( (item) => {
@@ -82,19 +85,24 @@ export default function Side1() {
             })}
               
         </div>
-        <button>
-            <Link to="/size" state={neworder}>Previous</Link>
-        </button>
-        {
+        <p>
+        <Link className='button-text' to="/size" state={neworder}><Button variant="primary">
+            Previous</Button>
+        </Link>
+        <Link className='button-text' to="/side2" state={neworder}><Button variant="primary">
+          Next</Button>
+        </Link>
+        {/* {
           order.smallOrder.size == 'bowl' ? 
-          <button>
-            <Link to ="/entree1" state={neworder}>Next</Link>
-          </button>
+          <Link className='button-text' to="/entree1" state={neworder}><Button variant="primary">
+          Next</Button>
+          </Link>
           :
-          <button> {/*just need to add style with tailwind or bootstrap */}
-            <Link to="/side2" state={neworder}>Next</Link>
-        </button>
-        }
+          <Link className='button-text' to="/side2" state={neworder}><Button variant="primary">
+          Next</Button>
+          </Link>
+        } */}
+        </p>
     </div>
   )
 }

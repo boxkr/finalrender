@@ -2,8 +2,17 @@
     background-color: white;
     display: flex;
     flex-direction: row;
-    width: 300px;
+    width: 700px;
     margin-bottom: 20px;
+    border: black;
+    border-radius: 40px;
+    padding: 3%;
+}
+
+.item-button:hover{
+    background-color: rgb(177, 177, 177);
+    /* border-radius: 10px; */
+    padding: 5%;
 }
 
 .top-level-item-render{
@@ -13,7 +22,11 @@
     pointer-events: none;
 }
 .item-button-selected{
-    background-color: red;
+    background-color: #000000 !important;
+    color: white;
+    border-color: rgb(78, 78, 78);
+    border-width: 10px;
+    
 }
 .centered-container{
     display: flex;
