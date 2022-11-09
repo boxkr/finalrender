@@ -27,7 +27,7 @@ export default function MenuManagementPopup(props) {
         fetch("http://localhost:3000/api/Sizes")
             .then((response) => response.json())
             .then((data) => setCurrentSizes(data));
-        fetch("http://localhost:3000/api/Sizes")
+        fetch("http://localhost:3000/api/Inventory")
             .then((response) => response.json())
             .then((data)=>setCurrentInventory(data))
     }, [updater]);
@@ -117,6 +117,7 @@ export default function MenuManagementPopup(props) {
     }
 
     console.log(currentSizes)
+    console.log(currentInventory)
     return (
         <div className="management-container">
             <Button onClick={handleClose}>Close</Button>
