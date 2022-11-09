@@ -79,10 +79,10 @@ export default function Entree3() {
             })}
         </div>
         <p>
-        <Link className='button-text' to="/entree2"><Button variant="primary">
+        <Link className='button-text' to="/entree2" state={neworder}><Button variant="primary">
             Previous</Button>
         </Link>
-        <Link className='button-text' to="/extra"><Button variant="primary">
+        <Link className='button-text' to="/extra" state={neworder}><Button variant="primary">
             Next</Button>
         </Link>
         </p>

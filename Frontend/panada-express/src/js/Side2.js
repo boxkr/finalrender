@@ -79,10 +79,10 @@ export default function Side2() {
             })}
         </div>
         <p>
-        <Link className='button-text' to="/side1"><Button variant="primary">
+        <Link className='button-text' to="/side1" state={neworder}><Button variant="primary">
             Previous</Button>
         </Link>
-        <Link className='button-text' to="/entree1"><Button variant="primary">
+        <Link className='button-text' to="/entree1" state={neworder}><Button variant="primary">
             Next</Button>
         </Link>
         </p>

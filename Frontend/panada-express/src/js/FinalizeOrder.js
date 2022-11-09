@@ -70,7 +70,7 @@ export default function FinalizeOrder() {
         <Link className='button-text' onClick={handleFinalize}><Button variant="success">
             Order Now</Button>
         </Link>
-        {/* { fullOrderDisplay } */}
+        { fullOrderDisplay }
         </p>
     </div>
   )

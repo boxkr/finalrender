@@ -84,7 +84,7 @@ export default function Size() {
                 </div>
             ))}
         </div>
-        <Link className='button-text' to="/side1"><Button variant="primary">
+        <Link className='button-text' to="/side1" onClick={verifyValidContinue} state={order}><Button variant="primary">
             Next</Button>
         </Link>
 
