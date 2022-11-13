@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react'
-import {Link, useLocation} from "react-router-dom"
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from "react-router-dom"
 import "../css/order.css"
 import Button from 'react-bootstrap/Button'
 import '../css/Ordering.css'
 
-export default function Extra() {
+export default function Entree() {
 
   /**
   * These are state variables to hold the items from the api, the previous selected item, and our order object
@@ -13,16 +13,13 @@ export default function Extra() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [lastSelectedButton, setLastUsedButton] = useState(null);
   const [orderState, setOrderState] = useState(useLocation().state);
-  const [nextPage, setNextPage] = useState('/finalizeOrder');
+  const [nextPage, setNextPage] = useState('/redirect');
 
   /** 
      * HANDLE_ITEM_ADD
      * This function handles the item click, it highlights the selected item and adds it to the order object
     */
    const handleItemAdd = (e)=>{
-    //console.log(e.target.id);
-    //console.log(e.target)
-
     //if its not the first time, we want to reset the color on the last selected item to prepare for the new selection
     if(lastSelectedButton != null){
         lastSelectedButton.target.className="item-button"
@@ -46,9 +43,14 @@ export default function Extra() {
   * Pushes this page onto the selectionHistory stack, which lets you know which page was last so that you can return to it
   * when you click the back button
   */
-   const saveSelection = ()=>{
+  const saveSelection = ()=>{
     let temp = orderState;
-    temp.selectionHistory.push({"page": "/extra", "selection": selectedOption})
+    temp.selectionHistory.push({"page": "/entree", "selection": selectedOption})
+
+    if (temp.numEntrees > 0) {
+      temp.numEntrees -= 1;
+    }
+
     setOrderState(temp);
     console.log(orderState)
   }
@@ -59,9 +61,24 @@ export default function Extra() {
   const removePreviousSelection = ()=>{
     let temp = orderState;
     temp.selectionHistory.pop();
+
+    temp.numEntrees += 1;
+
     setOrderState(temp);
     console.log(orderState)
   }
+
+
+  /* Logic for determining what the next page is depending on how many sides/entrees there are left to decide*/
+  useEffect(() => {
+    if (orderState.numEntrees == 0) {
+      setNextPage("/extra");
+    }
+    let temp = orderState;
+    temp.redirectDest = "/entree";
+    setOrderState(temp);
+    console.log(orderState)
+  }, []);
 
   useEffect(() => {
     setOrderState(orderState);
@@ -72,20 +89,18 @@ export default function Extra() {
 
   return (
     <div className='centered-container'>
-        <h1>Any Extras?</h1>
+      <h1>Choose an entree</h1>
         <div className='top-level-item-render'>
           {items.map( (item) => {
               
               //we have grabbed the entire inventory, but we only want to render the sides on this particular page
-              if(item.itemtype != 'etc'){
+              if(item.itemtype != 'entree'){
                 return;
               }else{
                 return (
                   <div id={item.name} className="item-button" onClick={handleItemAdd} key={item.id}>
                     <p className='item-id non-clickable'>{item.id}</p>  
                     <p className='non-clickable'>{item.name}</p>
-                    <p>{item.numSides}</p>
-                    <p>{item.numEntrees}</p>
                     <p className='item-price non-clickable'>{item.price}</p>
                   </div>
                   )

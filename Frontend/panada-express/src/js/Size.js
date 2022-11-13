@@ -7,6 +7,17 @@ import '../css/Ordering.css'
 
 export default function Size() {
     
+    /**
+     * These are state variables to hold the items from the api, the previous selected item, and our order object both large and small
+     */
+     const location = useLocation();
+     let previousOrderState = location.state;
+     const [sizes, setSizes] = useState([]);
+     const [selectedOption, setSelectedOption] = useState(null);
+     const [lastSelectedButton, setLastUsedButton] = useState(null);
+     const [orderState,setOrderState] = useState({currentSize: "", totalOrder: (previousOrderState == undefined || previousOrderState == null) ? [] : previousOrderState.totalOrder})
+ 
+
     /** 
      * HANDLE_ITEM_ADD
      * This function handles the item click, it highlights the selected item and adds it to the order object
@@ -30,34 +41,30 @@ export default function Size() {
         setLastUsedButton(e);
         let name = e.target.id;
         console.log(name,"Selected");
-        let placeholder = order;
-        placeholder.smallOrder['size'] = name;
-        updateOrder(placeholder);
-        
-
+        let temp = orderState;
+        temp.currentSize = name;
+        temp.selectionHistory = [];
+        temp.numEntrees = parseInt(e.target.getAttribute('numentrees'));
+        temp.numSides = parseInt(e.target.getAttribute('numsides'));
+        setOrderState(temp);
+        setSelectedOption(name);
+        console.log(orderState);
+        console.log(sizes);
     }
 
     /**
-     * This will tell us if we can continue. We don't want to continue on with no size selected.
-     * Right now this just returns true or false, but in the future lets think about conditionally rendering the next button
+     * Pushes this page onto the selectionHistory stack, which lets you know which page was last so that you can return to it
+     * when you click the back button
      */
-    const verifyValidContinue = ()=>{
-        if(order == {}){
-            console.log(false);
-        }else{
-            console.log(true);
-        }
+    const saveSelection = ()=>{
+        let temp = orderState;
+        temp.selectionHistory.push({"page": "/size", "selection": temp.currentSize})
+
+        temp.numSides -= 1;
+
+        setOrderState(temp);
+        console.log(orderState)
     }
-
-    /**
-     * These are state variables to hold the items from the api, the previous selected item, and our order object both large and small
-     */
-    const location = useLocation();
-    let passedInOrder = location.state;
-    const [sizes, setSizes] = useState([]);
-    const [lastSelectedButton, setLastUsedButton] = useState(null);
-    const [order,updateOrder] = useState({smallOrder: {}, largeOrder: (passedInOrder == undefined || passedInOrder == null) ? [] : passedInOrder.largeOrder})
-
     
     
 
@@ -75,18 +82,18 @@ export default function Size() {
         <div className='top-level-item-render'>
             {/*This will create a element for every size so we can see it on the screen */}
             {sizes.map((size) => (
-                <div id={size.name} className="item-button" onClick={handleItemAdd} key={size.id}>
+                <div id={size.name} numentrees={size.numentrees} numsides={size.numsides} className="item-button" onClick={handleItemAdd} key={size.id}>
                     <p className='item-id non-clickable'>{size.id}</p>  
                     <p className='non-clickable'>{size.name}</p>
-                    <p>{size.numSides}</p>
-                    <p>{size.numEntrees}</p>
                     <p className='item-price non-clickable'>{size.price}</p>
                 </div>
             ))}
         </div>
-        <Link className='button-text' to="/side1" onClick={verifyValidContinue} state={order}><Button variant="primary">
-            Next</Button>
-        </Link>
+        { selectedOption &&
+            <Link className='button-text' to="/side" onClick={saveSelection} state={orderState}><Button variant="primary">
+                Next</Button>
+            </Link>
+        }
 
         <br></br>
         <Link className='button-text' style={{ textDecoration: 'none' }} to="/"><Button variant="secondary">
