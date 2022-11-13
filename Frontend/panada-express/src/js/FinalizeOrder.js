@@ -1,77 +1,90 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Link, useLocation} from "react-router-dom"
 import Button from 'react-bootstrap/Button'
 import '../css/Ordering.css'
 
 export default function FinalizeOrder() {
 
-  const location = useLocation()
-  let order = location.state
+  const [orderState, setOrderState] = useState(useLocation().state);
 
-  const handleOrderMore = () => {
-    //we're not done yet, so we push the order we have currently to a list of our orders, and restart
-    order.largeOrder.push(order.smallOrder);
-    order.smallOrder={};
+  let totalOrder = orderState.totalOrder;
+
+  //Sets the actual order state totalOrder to the one with the current item added.
+  const addCurrentToTotalOrder = () => {
+    let temp = orderState;
+    temp.totalOrder = totalOrder;
+    temp.selectionHistory = [];
+    setOrderState(temp);
   }
 
   const handleFinalize = () => {
+    addCurrentToTotalOrder();
+    console.log("order finalized");
 
-    console.log("order finalized")
-
-    //backend API call
-
-    //probably redirect to some page, maybe displaying how much you paid
+    //TODO: backend API call
 
   }
 
-  console.log(order);
-  let allItems = [...order.largeOrder];
-  allItems.push(order.smallOrder);
+  /**
+    * Pops the previous page off of the selectionHistory stack. Called when heading back to the previous page.
+    */
+   const removePreviousSelection = () => {
+    let temp = orderState;
+    temp.selectionHistory.pop();
+    setOrderState(temp);
+    console.log(orderState)
+  }
 
-  console.log(allItems)
 
-  for (let i = 0; i < allItems.length; i++) {
-    allItems[i].items_array = [];
-    for(const [key, value] of Object.entries(allItems[i])) {
-      if (key !== "size" && key !== "items_array") {
-        allItems[i].items_array.push(value + "\n");
-      }
+  let temp = [...orderState.totalOrder];
+  console.log(orderState)
+
+  if (temp.length > orderState.totalOrder.length) {
+    return;
+  }
+  
+  let currentItem = {"Size": orderState.currentSize, "Items": []};
+
+  for (let i = 0; i < orderState.selectionHistory.length; i++) {
+    if (orderState.selectionHistory[i]["page"] !== "/size") {
+      currentItem["Items"].push(orderState.selectionHistory[i]["selection"]);
     }
   }
 
-  console.log(allItems)
-  
-  const fullOrderDisplay = allItems.map((smallOrder, index1) => {
+  temp.push(currentItem);
+
+  totalOrder = temp;
+
+  let fullOrderDisplay = totalOrder.map((orderItem, index1) => {
     return (
       <div key={index1}>
-        <h3> {smallOrder.size.toUpperCase()} </h3>
+        <h3> {orderItem["Size"].toUpperCase()} </h3>
         {
-          smallOrder.items_array.map((order_item, index2) => (
-            <p key={index2}>{order_item}</p>
+          orderItem["Items"].map((item_component, index2) => (
+            <p key={index2}>{item_component}</p>
           ))
         } 
       </div>
   )});
 
 
-  
   console.log(fullOrderDisplay)
 
   return (
     <div className='finalize'>
         <h1>Your Order Summary</h1>
         <p>
-        <Link className='button-text' to="/extra"><Button variant="primary">
+        <Link className='button-text' onClick={removePreviousSelection} to="/extra" state={orderState}><Button variant="primary">
             Previous</Button>
         </Link>
-        <Link className='button-text' onClick={handleOrderMore} to="/size"><Button variant="primary">
-            Continue your order</Button>
+        <Link className='button-text' onClick={addCurrentToTotalOrder} to="/size" state={orderState}><Button variant="primary">
+            Order More</Button>
         </Link>
-        <Link className='button-text' onClick={handleFinalize}><Button variant="success">
-            Order Now</Button>
+        <Link className='button-text' onClick={handleFinalize} to="/" /* TODO: Payment page */ ><Button variant="success">
+            Finalize Order</Button>
         </Link>
-        { fullOrderDisplay }
         </p>
+        { fullOrderDisplay }
     </div>
   )
 }
