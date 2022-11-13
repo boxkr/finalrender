@@ -82,11 +82,7 @@ export default function Extra() {
               }else{
                 return (
                   <div id={item.name} className="item-button" onClick={handleItemAdd} key={item.id}>
-                    <p className='item-id non-clickable'>{item.id}</p>  
                     <p className='non-clickable'>{item.name}</p>
-                    <p>{item.numSides}</p>
-                    <p>{item.numEntrees}</p>
-                    <p className='item-price non-clickable'>{item.price}</p>
                   </div>
                   )
               }
