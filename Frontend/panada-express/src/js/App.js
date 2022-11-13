@@ -29,12 +29,7 @@ function App(props) {
               <Route path='/manager' element = {<Manager />} />
               <Route path='/size' element = {<Size />} />
               <Route path='/side' element = {<Side />} />
-              <Route path='/side1' element = {<Side1 />} />
-              <Route path='/side2' element = {<Side2 />} />
               <Route path='/entree' element = {<Entree />} />
-              <Route path='/entree1' element = {<Entree1 />} />
-              <Route path='/entree2' element = {<Entree2 />} />
-              <Route path='/entree3' element = {<Entree3 />} />
               <Route path='/extra' element = {<Extra />} />
               <Route path='/drink' element = {<Drink />} />
               <Route path='/finalizeOrder' element = {<FinalizeOrder />} />

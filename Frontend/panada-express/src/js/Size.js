@@ -82,10 +82,9 @@ export default function Size() {
         <div className='top-level-item-render'>
             {/*This will create a element for every size so we can see it on the screen */}
             {sizes.map((size) => (
-                <div id={size.name} numentrees={size.numentrees} numsides={size.numsides} className="item-button" onClick={handleItemAdd} key={size.id}>
-                    <p className='item-id non-clickable'>{size.id}</p>  
+                <div id={size.name} numentrees={size.numentrees} numsides={size.numsides} className="item-button" onClick={handleItemAdd} key={size.id}>  
                     <p className='non-clickable'>{size.name}</p>
-                    <p className='item-price non-clickable'>{size.price}</p>
+                    <p className='item-price non-clickable'>${size.price}</p>
                 </div>
             ))}
         </div>
