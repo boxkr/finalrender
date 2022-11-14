@@ -1,17 +1,18 @@
 import React, {useState, useEffect} from 'react'
+import {Link} from 'react-router-dom'
 import '../css/managerstyles.css';
 import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
 import {Button} from 'react-bootstrap';
 import MenuManagementPopup from './MenuManagementPopup'
 import InventoryManagementPopup from './InventoryManagementPopup'
-
+import ManagerReportPopup from './ManagerReportPopup'
 
 export default function Manager() {
 
     
     const [menuPopupCounter, setMenuPopupCounter] = useState(1);
     const [inventoryPopupCounter, setInventoryPopupCounter] = useState(1);
-
+    const [reportPopupCounter,setReportPopupCounter] = useState(1);
     
 
     
@@ -22,6 +23,11 @@ export default function Manager() {
 
     const handleInventoryClick=()=>{
         setInventoryPopupCounter(inventoryPopupCounter+1);
+    }
+
+    const handleReportClick=()=>{
+        setReportPopupCounter(reportPopupCounter+1);
+       
     }
     
     
@@ -41,7 +47,14 @@ export default function Manager() {
                 Inventory Management
             </Button>
             {(inventoryPopupCounter % 2 == 0) ? <InventoryManagementPopup popupCounter={inventoryPopupCounter} popCounterFunction={setInventoryPopupCounter}/> : ""}
-            
+            <br></br>
+            <Button variant="primary" size="lg" onClick={handleReportClick   }> {/*just need to add style with tailwind or bootstrap */}
+                Reports
+            </Button>
+            {(reportPopupCounter % 2 == 0) ? <ManagerReportPopup popupCounter={reportPopupCounter} popCounterFunction={setReportPopupCounter}/> : ""}
+            <Link className='button-text' to="/"><Button variant="secondary">
+            Return to landing page</Button>
+          </Link>
         </div>
     )
 }
