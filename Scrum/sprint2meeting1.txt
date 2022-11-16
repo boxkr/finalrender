@@ -1,0 +1,49 @@
+TUESDAY 11/15/2022
+
+AGENDA:
+
+    -How are we doing on the assigned tasks?
+    -Friday Presentation
+    -Things for sprint 3?
+
+
+KEEGAN:
+
+    -Finished the frontend for the additional manager functionalities
+    -Still need to hook up and do the actual functionalities
+
+DEREK:
+
+    -Most of the refactoring is done.
+    -Removed IDs from the options on each page
+    -Still need to do the POST request for order finalization
+
+WILLIAM:
+
+    -Trying out OAUTH in another smaller "project"
+    -Want to play with it initially so I know what I'm doing before putting it in ours
+
+BRANDON:
+
+    -Have been super busy with a couple exams, haven't been able to look at it as much as I want to
+    -Thinking of different ideas of how to use the maps API.
+    -Maybe a good idea would be: Get location -> set default location based on location
+
+-----------
+
+FRIDAY PRESENTATION:
+
+    -Need to get organized for friday presentation.
+    -There will be a google slides in the drive tonight.
+    -Everybody needs to add what theyve been doing and what they plan on doing this sprint, and less in depth last sprint.
+
+------------
+
+Need to think about things for sprint 3:
+
+    -Become fully compliant
+        -Need to set it up on a host
+    -Can we add rewards and the google apis together somehow?
+    -Fun stuff
+        -Facial recognition login
+    -Further "gamification". Make things for fun somehow, be it design or otherwise.
