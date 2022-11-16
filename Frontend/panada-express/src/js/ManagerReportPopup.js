@@ -20,14 +20,40 @@ export default function InventoryManagementPopup(props) {
     const [salesReportEndDate, setSalesReportEndDate] = useState("");
     const [excessReportStartDate, setExcessReportStartDate] = useState("");
     const [excessReportEndDate,setExcessReportEndDate] = useState("");
-    const [restockReportStartDate, setRestockReportStartDate] = useState("");
-    const [restockReportEndDate, setRestockReportEndDate] = useState("");
     const [currentReport,setCurrentReport] = useState("");
+    const [curInventory,setCurInventory] = useState([]);
+    const [excessItems,setExcessItems] = useState([]);
+    const [curInventoryHistory,setCurInventoryHistory] = useState([]);
+    const [curOrderHistory,setCurOrderHistory] = useState([])
 
     const populateBasedOnState=(state)=>{
 
+        
         return(
-        <p className="restock-text">{state}</p>
+            <div className='centered'>
+                <p className="restock-text">{state}</p>
+                
+                {state == 'restock' ? <div >
+                    <h4 className='restock-header'>These items are below their minimum: </h4>
+                    <div className='restock-view'>
+                        {excessItems.length == 0 ? <p className='restock-text'>All items are up to stock</p> : ""}
+                        {excessItems.map((item) => (
+                            <div key={item.id}>
+                                <p className='restock-text'>{item.name}</p>
+                                <p className='restock-text'>Minimum: {item.minimum}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div> : ""}
+                {state == 'excess' ? <div>
+                <p className='restock-text'>balls</p>
+                </div> : ""}
+                {state == 'sales' ? <div>
+                    
+                </div> : ""}
+            </div>
+            
+            
         )
     }
 
@@ -37,7 +63,13 @@ export default function InventoryManagementPopup(props) {
         console.log("salesReportSubmit");
         console.log(salesReportStartDate);
         console.log(salesReportEndDate);
+        console.log(curOrderHistory)
         setCurrentReport("sales");
+
+        //dictionary of entrees,sides,extras with inital value 0
+        //get orderhistory, go through and find the first order with id salesReportStartDate
+        //when that is seen, start going forward and d[name]+=1
+        //display the dictionary to the screen
     }
 
     const handleExcessReportSubmit = (e)=>{
@@ -45,18 +77,41 @@ export default function InventoryManagementPopup(props) {
         console.log("excess submit")
         console.log(excessReportStartDate);
         console.log(excessReportEndDate);
+        console.log(curInventoryHistory)
         setCurrentReport("excess");
+
+        //get inventoryhistory, find first date index. mark the values of all the items at this spot
+        //find the last end date index, mark the values of all the items at this spot
+        //do division to find which ones didn't sell 10%
+        //display those
+
     }
 
-    const handleRestockReportSubmit = (e)=>{
+    const handleRestockReportSubmit = async (e)=>{
         e.preventDefault();
         console.log('restock submit');
-        console.log(restockReportStartDate);
-        console.log(restockReportEndDate);
         setCurrentReport('restock');
-    }
-    return (
 
+        //get a request of all the inventory items
+        //from inventory, look at the quantities and compare with minimums
+        let res = []
+        for(let i =0; i < curInventory.length; i++){
+
+            if(curInventory[i].minimum >= curInventory[i].quantity){
+                res.push(curInventory[i]);
+            }
+        }
+        setExcessItems(res);
+
+    }
+
+    useEffect(() => {
+        fetch("http://localhost:3000/api/Inventory")
+            .then((response) => response.json())
+            .then((data) => setCurInventory(data));
+    }, [updater]);
+
+    return (
         <div className="management-container">
             <Button onClick={handleClose}>Close</Button>
             <h1 className="management-header">Reports</h1>
@@ -87,18 +142,10 @@ export default function InventoryManagementPopup(props) {
                 </div>
                 <div className='report-container'>
                     <h2 className='restock-header'>Generate Restock Report</h2>
-                    <form>
-                        <label className='restock-text'>Start date:</label>
-                        <input type='text' value={restockReportStartDate} onChange={(e)=>{setRestockReportStartDate(e.target.value)}}/>
-                        <br></br>
-                        <label className='restock-text'>End date:</label>
-                        <input type='text' value={restockReportEndDate} onChange={(e)=>{setRestockReportEndDate(e.target.value)}}/>
-                        <br></br>
-                        <input value="Submit Edit" type='submit' onClick={handleRestockReportSubmit}/>
-                    </form>
+                    <Button onClick={handleRestockReportSubmit}>Generate</Button>
                 </div>
             </div>
-            <div className="inventory-view">
+            <div className="report-view">
                 {populateBasedOnState(currentReport)}
             </div>
             
