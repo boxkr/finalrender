@@ -73,6 +73,7 @@ export default function MenuManagementPopup(props) {
         let res = await fetch("http://localhost:3000/api/Sizes",{method: 'PUT',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)})
         forceUpdate(Math.random());
         console.log("complete",res)
+        alert("Finished editing size");
         
     }
     const handleNewItem= async (e)=>{
@@ -86,6 +87,7 @@ export default function MenuManagementPopup(props) {
         let res = await fetch("http://localhost:3000/api/Inventory",{method: 'POST',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)});
         forceUpdate(Math.random())
         console.log("complete",res);
+        alert("Added "+newItemName);
     }
     
     const handleDelete=async(e)=>{
@@ -113,6 +115,7 @@ export default function MenuManagementPopup(props) {
         let obj = {params: {id: id}};
         let res = await fetch(url,{method: 'DELETE',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)});
         console.log("complete",res)
+        alert("Finished deleting "+delItem);
 
     }
 
