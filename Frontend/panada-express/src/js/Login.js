@@ -2,13 +2,36 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import '../css/Login.css';
 import { Link } from "react-router-dom";
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
+import {useEffect} from 'react';
+import {gapi} from 'gapi-script';
+
+// const fs = require('fs');
+// const client = fs.readFileSync('../client_secret.txt', 'utf8').split(/\r?\n/);
+
+const clientID = "726483990366-aja05ddbfl17kvjes627pg8tvge9f4re.apps.googleusercontent.com"
 
 
 export default function Login() {
+
+  useEffect(() => {
+    function start(){
+      gapi.auth2.init({
+        clientId: clientID,
+        scope: ""
+      })
+    };
+
+    gapi.load('client:auth2', start)
+  })
+
   return (
     <div className='login-div'>
         <h1>Login to your Panda Express account</h1>
         <br></br>
+        <LoginButton />
+        <LogoutButton />
         <br></br>
         <form>
             <label>
