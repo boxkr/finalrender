@@ -1,0 +1,34 @@
+FRIDAY 11/18/2022
+
+AGENDA:
+
+    -WHERE ARE WE AT
+    -OVERVIEW
+
+
+KEEGAN:
+
+    -Looking at ways to speed up the manager reports. Excess report used to run in 1.5 minutes, now runs in 15 seconds but want it faster
+    -Dr. Thomas recommended using SQL itself to better make the query instead of doing more work outside of it
+
+DEREK:
+
+    -Finished refactoring where we're only using one entree and side component
+    -Will be doing POST request to hook up final order to order history
+
+
+WILLIAM:
+
+    -Still working on OAUTH, I realized I should be working with Brandon more closely than I thought.
+    -May not need OAUTH for logging in, rather just use database
+
+
+BRANDON:
+
+    -Still working on translate and google maps api integration, figuring out OAUTH portin.
+    -Figured out how to embed a map, need to figure out how to pinpoint
+
+
+OVERVIEW:
+
+    Things are going good, OAUTH and api integration is proving to be kind of difficult but it's not a huge issue yet.

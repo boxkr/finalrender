@@ -75,6 +75,7 @@ export default function InventoryManagementPopup(props) {
         //interesting footnote, react actually wont re-render unless this state value is different than what it was before.
         //to get around this, we need a random variable
         forceUpdate(Math.random())
+        alert("Done with stock update");
 
     }
     
