@@ -10,12 +10,11 @@ import { TranslateContext } from 'react-auto-translate/lib/commonjs/translator';
 import ReactLanguageSelect from 'react-languages-select';
 import 'react-languages-select/css/react-languages-select.css';
 import { BsTelephoneMinus } from 'react-icons/bs';
-
 let welcome = "Welcome To Panda Express";
 // let userLanguage = 'en';
-
+//(languageCode)=>setUserLanguage(languageCode)
 export default function Landing() {
-  const [userLanguage, setUserLanguage] = useState("");
+  const [userLanguage, setUserLanguage] = useState('en');
  return (
     <div className="App">
       <ReactLanguageSelect className="language-select"
@@ -24,7 +23,6 @@ export default function Landing() {
         onSelect={(languageCode)=>setUserLanguage(languageCode)}
       ></ReactLanguageSelect>
       <Translator 
-        // cacheProvider={cacheProvider}
         from='en'
         to={userLanguage}
         googleApiKey='AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY'
@@ -39,7 +37,7 @@ export default function Landing() {
             <Translate>Login</Translate></Button>
           </Link>
         <br></br>
-        <Link className='button-text' to="/size"><Button variant="primary">
+        <Link className='button-text' to="/size" state={userLanguage}><Button variant="primary">
             <Translate>Order Now!</Translate></Button>
           </Link>
         <br></br>

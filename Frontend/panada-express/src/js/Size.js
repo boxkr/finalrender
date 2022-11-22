@@ -3,20 +3,21 @@ import { Link, useLocation } from "react-router-dom"
 // import '../css/Size.css';
 import Button from 'react-bootstrap/Button';
 import '../css/Ordering.css'
-
+import {Translator, Translate} from 'react-auto-translate';
+import { TranslateContext } from 'react-auto-translate/lib/commonjs/translator';
 
 export default function Size() {
-    
     /**
      * These are state variables to hold the items from the api, the previous selected item, and our order object both large and small
      */
      const location = useLocation();
+     const userLanguage = useState(useLocation().state);
      let previousOrderState = location.state;
      const [sizes, setSizes] = useState([]);
      const [selectedOption, setSelectedOption] = useState(null);
      const [lastSelectedButton, setLastUsedButton] = useState(null);
      const [orderState,setOrderState] = useState({currentSize: "", totalOrder: (previousOrderState == undefined || previousOrderState == null) ? [] : previousOrderState.totalOrder})
- 
+    
 
     /** 
      * HANDLE_ITEM_ADD
@@ -74,30 +75,38 @@ export default function Size() {
             .then((response) => response.json())
             .then((data) => setSizes(data)); 
     }, []);
-    
+    orderState.language = userLanguage;
+    //Dont ask me why this works but it does
+    let lang = JSON.stringify(userLanguage)[2] + JSON.stringify(userLanguage)[3];
   return (
-    <div className='centered-container'>
-        <h1>Choose your size</h1> 
+      <div className='centered-container'>
+        <Translator
+        from='en'
+        to={lang}
+        googleApiKey='AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY'
+        >
+        <h1><Translate>Choose your size</Translate></h1> 
         
         <div className='top-level-item-render'>
             {/*This will create a element for every size so we can see it on the screen */}
             {sizes.map((size) => (
                 <div id={size.name} numentrees={size.numentrees} numsides={size.numsides} className="item-button" onClick={handleItemAdd} key={size.id}>  
-                    <p className='non-clickable'>{size.name}</p>
+                    <p className='non-clickable'><Translate>{size.name}</Translate></p>
                     <p className='item-price non-clickable'>${size.price}</p>
                 </div>
             ))}
         </div>
         { selectedOption &&
             <Link className='button-text' to="/side" onClick={saveSelection} state={orderState}><Button variant="primary">
-                Next</Button>
+                <Translate>Next</Translate></Button>
             </Link>
         }
 
         <br></br>
         <Link className='button-text' style={{ textDecoration: 'none' }} to="/"><Button variant="secondary">
-            Return to landing page</Button>
+            <Translate>Return to landing page</Translate></Button>
         </Link>
+        </Translator>
     </div>
   )
 }
