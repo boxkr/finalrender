@@ -233,6 +233,38 @@ router.put('/InventoryHistory', function(req, res, next) {
   })
 });
 
+router.post('/InventoryHistoryStartDate', function(req, res, next) {
+  //func for getting inventory by dates in attempt to speed it up
+  
+  //TODO -> FOR SPEEDUP, TRY SELECT ID FROM INVENTORYHISTORY, THEN FEED FIRST VAL INTO ANOTHER CALL FOR INVENTORYHISTORY ID
+  const startDate = req.body.first;
+  const endDate = req.body.second;
+
+  console.log(startDate,endDate)
+  if(endDate == "noinput" && startDate != "noinput"){
+    console.log("No end date");
+    client.query("SELECT * FROM InventoryHistory WHERE id=(SELECT MIN(id) FROM InventoryHistory WHERE date >= $1)", [startDate], (error, results) => {
+      if (error) { throw error; }
+      res.status(200).json(results.rows);
+    });
+  }else if(endDate != "noinput" && startDate == "noinput"){
+    console.log("No start date");
+    client.query("SELECT * FROM InventoryHistory WHERE id=(SELECT MAX(id) FROM InventoryHistory WHERE date < $1)", [endDate], (error, results) => {
+      if (error) { throw error; }
+      res.status(200).json(results.rows);
+    });
+  }else if(startDate != "noinput" && endDate != "noinput"){
+    console.log("Both start and end dates exist");
+    client.query("SELECT * FROM InventoryHistory WHERE id=(SELECT MIN(id) FROM InventoryHistory WHERE date < $1 AND date > $2)", [startDate,endDate], (error, results) => {
+      if (error) { throw error; }
+      res.status(200).json(results.rows);
+    });
+  }else{
+    console.log("Cant run on no input")
+    res.status(888);
+  }
+});
+
 router.get('/InventoryHistory/:id', function(req, res, next) {
   client.query('SELECT * FROM InventoryHistory WHERE id=$1', [req.params.id], (error, results) => {
     if (error) { throw error; }
