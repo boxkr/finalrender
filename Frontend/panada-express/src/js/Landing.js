@@ -24,6 +24,10 @@ export default function Landing() {
         <Link className='button-text' to="/size"><Button variant="primary">
             Order Now!</Button>
           </Link>
+        <br></br>
+        <Link className='button-text' to="/Location"><Button variant="warning">
+            View our location on a map</Button>
+          </Link>
       </header>
     </div>
   )

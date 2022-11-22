@@ -6,7 +6,9 @@ import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
 import {Button} from 'react-bootstrap';
 import '../css/Location.css'
 import GoogleMapReact from 'google-map-react';
-import { Marker } from 'google-maps-react';
+// import { Marker } from '@react-google-maps/api';
+import { BsFillPinMapFill } from 'react-icons/bs';
+
 
 
 // KEY AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY
@@ -32,9 +34,12 @@ export default function Location() {
           defaultCenter={defaultProps.center}
           defaultZoom= {defaultProps.zoom}
         >
-        <Link className='button-text'to="/" lat={30.61242} lng={-96.34134}><Button variant="primary">
-            Return to landing page</Button>
-          </Link>
+        <BsFillPinMapFill className='pin'
+        lat={30.61242}
+        lng={-96.34134}
+        text="MSC Panda Express"
+        />
+        
         </GoogleMapReact>
       </div>
      )
