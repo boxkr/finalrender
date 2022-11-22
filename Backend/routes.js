@@ -313,7 +313,7 @@ router.post('/FinalizeOrder', async function(req, res, next) {
   }
   
   await client.query('COMMIT');
-  res.status(201).send('Order finalized');
+  res.sendStatus(201);
 });
 
 router.post('/EmployeeLogin', function(req, res, next) {
