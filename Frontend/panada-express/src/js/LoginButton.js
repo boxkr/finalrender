@@ -4,10 +4,13 @@ import {GoogleLogin} from 'react-google-login';
 // const client = fs.readFileSync('../client_secret.txt', 'utf8').split(/\r?\n/);st 
 const clientID = "726483990366-aja05ddbfl17kvjes627pg8tvge9f4re.apps.googleusercontent.com"
 
-function LoginButton(){
+function LoginButton(props){
 
     const onSuccess = (res) =>{
         console.log("Login Success! Current User: ", res.profileObj);
+        let temp = props.totalOrder;
+        temp.userID = res.profileObj.name;
+        props.setTotalOrder(temp);
     }
 
     const onFailure = (res) => {

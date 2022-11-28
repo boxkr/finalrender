@@ -8,7 +8,7 @@ import {Button} from 'react-bootstrap';
 
 let welcome = "Welcome To Panda Express";
 
-export default function Landing() {
+export default function Landing({orderInfo}) {
  return (
     <div className="App">
       <header className="App-header">

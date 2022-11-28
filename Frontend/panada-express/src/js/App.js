@@ -1,4 +1,5 @@
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
 import Login from "./Login";
 import ManagerLogin from "./ManagerLogin";
 import CreateAccount from "./CreateAccount";
@@ -17,25 +18,141 @@ import FinalizeOrder from "./FinalizeOrder";
 import Manager from "./Manager"
 import RedirectPage from "./RedirectPage"
 
+// export const contextContainer = React.createContext();
+
 function App(props) {
+  const [currentOrder, setCurrentOrder] = useState({
+    size: "",
+    price: 0,
+    selectionHistory: [],
+    numEntrees: 0,
+    numSides: 0,
+    sides: [],
+    entrees: [],
+    extra: ""
+  });
+  const [totalOrder, setTotalOrder] = useState({
+    serverName: "",
+    userID: "Guest",
+    orders: [],
+    totalPrice: 0
+  })
   return (
     <div className="App">
+      {/* <contextContainer.Provider value = {{currentOrder: [currentOrder, setCurrentOrder]}}> */}
         <BrowserRouter>
             <Routes>
-              <Route path='/' element = {<Landing />}/>
-              <Route path='/login' element = {<Login />} />
-              <Route path='/managerlogin' element = {<ManagerLogin />} />
-              <Route path='/createaccount' element = {<CreateAccount />} />
-              <Route path='/manager' element = {<Manager />} />
-              <Route path='/size' element = {<Size />} />
-              <Route path='/side' element = {<Side />} />
-              <Route path='/entree' element = {<Entree />} />
-              <Route path='/extra' element = {<Extra />} />
-              <Route path='/drink' element = {<Drink />} />
-              <Route path='/finalizeOrder' element = {<FinalizeOrder />} />
-              <Route path="/redirect" element={<RedirectPage />} />
+              <Route path='/' element = {
+                <Landing 
+                  // currentOrder = {currentOrder}
+                  // setCurrentOrder = {() => this.setCurrentOrder()} 
+                  // totalOrder = {totalOrder}
+                  // setTotalOrder = {setTotalOrder}
+                />
+                }
+              />
+              <Route path='/login' element = {
+                <Login 
+                  // currentOrder = {currentOrder} 
+                  // setCurrentOrder = {setCurrentOrder} 
+                  totalOrder = {totalOrder}
+                  setTotalOrder = {setTotalOrder}
+                />
+                } 
+              />
+              <Route path='/managerlogin' element = {
+                <ManagerLogin 
+                  // currentOrder = {currentOrder} 
+                  // setCurrentOrder = {setCurrentOrder} 
+                  totalOrder = {totalOrder}
+                  setTotalOrder = {setTotalOrder}
+                />
+                } 
+              />
+              <Route path='/createaccount' element = {
+                <CreateAccount 
+                  // currentOrder = {currentOrder}
+                  // setCurrentOrder = {setCurrentOrder}  
+                  // totalOrder = {totalOrder}
+                  // setTotalOrder = {setTotalOrder}
+                />
+                } 
+              />
+              <Route path='/manager' element = {
+                <Manager 
+                  // currentOrder = {currentOrder} 
+                  // setCurrentOrder = {setCurrentOrder} 
+                  // totalOrder = {totalOrder}
+                  // setTotalOrder = {setTotalOrder}
+                />
+                } 
+              />
+              <Route path='/size' element = {
+                <Size 
+                  currentOrder = {currentOrder} 
+                  setCurrentOrder = {setCurrentOrder} 
+                  // totalOrder = {totalOrder}
+                  // setTotalOrder = {setTotalOrder}
+                />
+              }
+              />
+              <Route path='/side' element = {
+                <Side 
+                  currentOrder = {currentOrder} 
+                  setCurrentOrder = {setCurrentOrder} 
+                  // totalOrder = {totalOrder}
+                  // setTotalOrder = {setTotalOrder}
+                />
+                }
+              />
+              <Route path='/entree' element = {
+                <Entree 
+                  currentOrder = {currentOrder} 
+                  setCurrentOrder = {setCurrentOrder} 
+                  // totalOrder = {totalOrder}
+                  // setTotalOrder = {setTotalOrder}
+                />
+                }
+              />
+              <Route path='/extra' element = {
+                <Extra 
+                  currentOrder = {currentOrder} 
+                  setCurrentOrder = {setCurrentOrder} 
+                  // totalOrder = {totalOrder}
+                  // setTotalOrder = {setTotalOrder}
+                />
+                }
+              />
+              {/* <Route path='/drink' element = {
+                <Drink
+                  currentOrder = {currentOrder}
+                  setCurrentOrder = {setCurrentOrder} 
+                  totalOrder = {totalOrder}
+                  setTotalOrder = {setTotalOrder}
+                />
+                }
+              /> */}
+              <Route path='/finalizeOrder' element = {
+                <FinalizeOrder
+                  currentOrder = {currentOrder}
+                  setCurrentOrder = {setCurrentOrder} 
+                  totalOrder = {totalOrder}
+                  setTotalOrder = {setTotalOrder}
+                />
+                }
+              />
+              {/* <Route path="/redirect" element={
+                <RedirectPage
+                  currentOrder = {currentOrder}
+                  setCurrentOrder = {setCurrentOrder} 
+                  totalOrder = {totalOrder}
+                  setTotalOrder = {setTotalOrder}
+                />
+                }
+              /> */}
             </Routes>
         </BrowserRouter>
+      {/* </contextContainer.Provider> */}
     </div>
   );
 }
