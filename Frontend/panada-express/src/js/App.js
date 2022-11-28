@@ -1,5 +1,6 @@
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 import Login from "./Login";
+import Location from "./Location";
 import ManagerLogin from "./ManagerLogin";
 import CreateAccount from "./CreateAccount";
 import Landing from "./Landing";
@@ -24,6 +25,7 @@ function App(props) {
             <Routes>
               <Route path='/' element = {<Landing />}/>
               <Route path='/login' element = {<Login />} />
+              <Route path='/Location' element = {<Location />} />
               <Route path='/managerlogin' element = {<ManagerLogin />} />
               <Route path='/createaccount' element = {<CreateAccount />} />
               <Route path='/manager' element = {<Manager />} />
