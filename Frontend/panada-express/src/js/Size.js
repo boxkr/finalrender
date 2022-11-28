@@ -79,14 +79,14 @@ export default function Size(props) {
             .then((response) => response.json())
             .then((data) => setSizes(data)); 
     }, []);
-    orderState.language = userLanguage;
+    // orderState.language = userLanguage;
     //Dont ask me why this works but it does
-    let lang = JSON.stringify(userLanguage)[2] + JSON.stringify(userLanguage)[3];
+    // let lang = JSON.stringify(userLanguage)[2] + JSON.stringify(userLanguage)[3];
   return (
       <div className='centered-container'>
         <Translator
         from='en'
-        to={lang}
+        to={props.totalOrder.userLanguage}
         googleApiKey='AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY'
         >
         <h1><Translate>Choose your size</Translate></h1> 

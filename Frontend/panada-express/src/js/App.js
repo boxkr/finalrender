@@ -35,6 +35,7 @@ function App(props) {
   const [totalOrder, setTotalOrder] = useState({
     serverName: "",
     userID: "Guest",
+    userLanguage: "en",
     orders: [],
     totalPrice: 0
   })
@@ -92,7 +93,7 @@ function App(props) {
                 <Size 
                   currentOrder = {currentOrder} 
                   setCurrentOrder = {setCurrentOrder} 
-                  // totalOrder = {totalOrder}
+                  totalOrder = {totalOrder}
                   // setTotalOrder = {setTotalOrder}
                 />
               }
@@ -151,6 +152,7 @@ function App(props) {
                 />
                 }
               /> */}
+              <Route path='/Location' element = {<Location />} />
             </Routes>
         </BrowserRouter>
       {/* </contextContainer.Provider> */}
