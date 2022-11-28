@@ -11,11 +11,12 @@ import ReactLanguageSelect from 'react-languages-select';
 import 'react-languages-select/css/react-languages-select.css';
 import { BsTelephoneMinus } from 'react-icons/bs';
 let welcome = "Welcome To Panda Express";
+
 // let userLanguage = 'en';
 //(languageCode)=>setUserLanguage(languageCode)
 export default function Landing() {
   const [userLanguage, setUserLanguage] = useState('en');
- return (
+  return (
     <div className="App">
       <ReactLanguageSelect className="language-select"
         searchable={true}

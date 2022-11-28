@@ -13,7 +13,7 @@ import {gapi} from 'gapi-script';
 const clientID = "726483990366-aja05ddbfl17kvjes627pg8tvge9f4re.apps.googleusercontent.com"
 
 
-export default function Login() {
+export default function Login(props) {
 
   useEffect(() => {
     function start(){
@@ -26,11 +26,17 @@ export default function Login() {
     gapi.load('client:auth2', start)
   })
 
+  let totalOrderPass = props.totalOrder;
+  let setTotalOrderPass = props.setTotalOrder;
+
   return (
     <div className='login-div'>
         <h1>Login to your Panda Express account</h1>
         <br></br>
-        <LoginButton />
+        <LoginButton 
+          totalOrder = {totalOrderPass}
+          setTotalOrder = {setTotalOrderPass}
+        />
         <LogoutButton />
         <br></br>
         <form>
