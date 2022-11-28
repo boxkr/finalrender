@@ -11,13 +11,14 @@ export default function Size() {
      * These are state variables to hold the items from the api, the previous selected item, and our order object both large and small
      */
      const location = useLocation();
+
      const userLanguage = useState(useLocation().state);
      let previousOrderState = location.state;
      const [sizes, setSizes] = useState([]);
      const [selectedOption, setSelectedOption] = useState(null);
      const [lastSelectedButton, setLastUsedButton] = useState(null);
-     const [orderState,setOrderState] = useState({currentSize: "", totalOrder: (previousOrderState == undefined || previousOrderState == null) ? [] : previousOrderState.totalOrder})
-    
+     const [orderState,setOrderState] = useState(location.state ? location.state : {currentSize: "", totalOrder: []})
+ 
 
     /** 
      * HANDLE_ITEM_ADD
@@ -44,6 +45,7 @@ export default function Size() {
         console.log(name,"Selected");
         let temp = orderState;
         temp.currentSize = name;
+        temp.currentSizePrice = parseFloat(e.target.getAttribute('price'));
         temp.selectionHistory = [];
         temp.numEntrees = parseInt(e.target.getAttribute('numentrees'));
         temp.numSides = parseInt(e.target.getAttribute('numsides'));
@@ -90,8 +92,10 @@ export default function Size() {
         <div className='top-level-item-render'>
             {/*This will create a element for every size so we can see it on the screen */}
             {sizes.map((size) => (
+
                 <div id={size.name} numentrees={size.numentrees} numsides={size.numsides} className="item-button" onClick={handleItemAdd} key={size.id}>  
                     <p className='non-clickable'><Translate>{size.name}</Translate></p>
+
                     <p className='item-price non-clickable'>${size.price}</p>
                 </div>
             ))}

@@ -1,0 +1,33 @@
+MONDAY 11/21/2022
+
+AGENDA:
+
+    -HAVE WE FINISHED / ARE WE CLOSE TO FINISHING
+    -PUSHING THINGS BACK
+
+
+KEEGAN:
+
+    -Finished the manager backend, made it very quick. All is good
+
+DEREK:
+
+    -Done hooking up order finalization
+
+
+WILLIAM:
+
+    -Done with OAUTH hookup for google accounts
+    -Going to quickly do the login for users, the backend infrastructure is already there
+    -Want to push rewards to next sprint
+
+
+BRANDON:
+
+    -Done implementing google translate, still having trouble with google maps
+
+
+PUSHING STUFF BACK:
+
+    -Some issues/miscommunication about OAUTH and what our login should be like. Things took awhile
+    -Want to push back google maps things, and the rewards system.
