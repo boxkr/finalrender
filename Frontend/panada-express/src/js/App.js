@@ -1,6 +1,7 @@
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 import React, { useState, useContext } from "react";
 import Login from "./Login";
+import Location from "./Location";
 import ManagerLogin from "./ManagerLogin";
 import CreateAccount from "./CreateAccount";
 import Landing from "./Landing";

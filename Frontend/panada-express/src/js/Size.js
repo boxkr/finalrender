@@ -3,7 +3,8 @@ import { Link } from "react-router-dom"
 // import '../css/Size.css';
 import Button from 'react-bootstrap/Button';
 import '../css/Ordering.css'
-// import contextContainer from './App';
+import {Translator, Translate} from 'react-auto-translate';
+import { TranslateContext } from 'react-auto-translate/lib/commonjs/translator';
 
 export default function Size(props) {
     
@@ -22,7 +23,7 @@ export default function Size(props) {
 
     //set obj for re-rendering
     let obj = props.currentOrder;
-
+  
     /** 
     * HANDLE_ITEM_ADD
     * This function handles the item click, it highlights the selected item and adds it to the order object
@@ -78,30 +79,40 @@ export default function Size(props) {
             .then((response) => response.json())
             .then((data) => setSizes(data)); 
     }, []);
-    
+    orderState.language = userLanguage;
+    //Dont ask me why this works but it does
+    let lang = JSON.stringify(userLanguage)[2] + JSON.stringify(userLanguage)[3];
   return (
-    <div className='centered-container'>
-        <h1>Choose your size</h1> 
+      <div className='centered-container'>
+        <Translator
+        from='en'
+        to={lang}
+        googleApiKey='AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY'
+        >
+        <h1><Translate>Choose your size</Translate></h1> 
         
         <div className='top-level-item-render'>
             {/*This will create a element for every size so we can see it on the screen */}
             {sizes.map((size) => (
-                <div id={size.name} numentrees={size.numentrees} numsides={size.numsides} price={size.price} className="item-button" onClick={handleItemAdd} key={size.id}>  
-                    <p className='non-clickable'>{size.name}</p>
+
+                <div id={size.name} numentrees={size.numentrees} numsides={size.numsides} className="item-button" onClick={handleItemAdd} key={size.id}>  
+                    <p className='non-clickable'><Translate>{size.name}</Translate></p>
+
                     <p className='item-price non-clickable'>${size.price}</p>
                 </div>
             ))}
         </div>
         { selectedOption &&
             <Link className='button-text' to="/side" onClick={saveSelection}><Button variant="primary">
-                Next</Button>
+                <Translate>Next</Translate></Button>
             </Link>
         }
         {/* state={orderState} */}
         <br></br>
         <Link className='button-text' style={{ textDecoration: 'none' }} to="/"><Button variant="secondary">
-            Return to landing page</Button>
+            <Translate>Return to landing page</Translate></Button>
         </Link>
+        </Translator>
     </div>
   )
 }
