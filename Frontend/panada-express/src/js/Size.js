@@ -95,7 +95,7 @@ export default function Size(props) {
             {/*This will create a element for every size so we can see it on the screen */}
             {sizes.map((size) => (
 
-                <div id={size.name} numentrees={size.numentrees} numsides={size.numsides} className="item-button" onClick={handleItemAdd} key={size.id}>  
+                <div id={size.name} numentrees={size.numentrees} numsides={size.numsides} price={size.price} className="item-button" onClick={handleItemAdd} key={size.id}>  
                     <p className='non-clickable'><Translate>{size.name}</Translate></p>
 
                     <p className='item-price non-clickable'>${size.price}</p>
