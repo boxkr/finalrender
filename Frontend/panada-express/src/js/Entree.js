@@ -70,6 +70,8 @@ export default function Entree(props) {
 
     props.setCurrentOrder(temp);
     // console.log(props.currentOrder);
+    window.scrollTo({top:0, left:0, behavior: 'smooth'});
+    document.getElementById(selectedOption).className = "item-button";
   }
 
   /**
@@ -124,8 +126,10 @@ export default function Entree(props) {
             Previous</Button>
         </Link>
         { selectedOption &&
-          <Link className='button-text' to={nextPage} onClick={saveSelection}><Button variant="primary">
-            Next</Button>
+          <Link className='button-text' to={nextPage} onClick={saveSelection}>
+              <Button variant="primary">
+                Next
+              </Button>
           </Link>
         }
         </p>
