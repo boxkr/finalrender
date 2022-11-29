@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from "react-router-dom"
+import { Link } from "react-router-dom"
 import "../css/order.css"
 import Button from 'react-bootstrap/Button'
 import '../css/Ordering.css'
 
-export default function Side() {
-  
+export default function Side(props) {
   /**
      * These are state variables to hold the items from the api, the previous selected item, and our order object
   */
-   const [items, setItems] = useState([]);
-   const [selectedOption, setSelectedOption] = useState(null);
-   const [lastSelectedButton, setLastUsedButton] = useState(null);
-   const [orderState, setOrderState] = useState(useLocation().state);
-   const [nextPage, setNextPage] = useState("/redirect");
+  //for populating page
+  const [items, setItems] = useState([]);
+  //for updating current order
+  const [selectedOption, setSelectedOption] = useState(null);
+  //for UI
+  const [lastSelectedButton, setLastUsedButton] = useState(null);
+  //for navigation
+  const [nextPage, setNextPage] = useState("/side");
+
+  //set obj for re-rendering
+  let obj = props.currentOrder;
 
   /** 
      * HANDLE_ITEM_ADD
@@ -38,14 +43,22 @@ export default function Side() {
     let name = e.target.id;
     setSelectedOption(name);
   }
+  
+  //maybe we might not need this
+  useEffect(() =>{
+    props.setCurrentOrder(obj);
+    console.log(props.currentOrder);
+  }, [selectedOption]) 
 
   /**
   * Pushes this page onto the selectionHistory stack, which lets you know which page was last so that you can return to it
   * when you click the back button
+  * Also adds the selected side (only when you press next)
   */
   const saveSelection = ()=>{
-      let temp = orderState;
+      let temp = props.currentOrder;
       temp.selectionHistory.push({"page": "/side", "selection": selectedOption})
+      temp.sides.push(selectedOption);
 
       if (temp.numSides == 0) {
         temp.numEntrees -= 1;
@@ -53,38 +66,36 @@ export default function Side() {
         temp.numSides -= 1;
       }
 
-      setOrderState(temp);
-      console.log(orderState)
+      props.setCurrentOrder(temp);
+      console.log(props.currentOrder);
   }
 
   /**
     * Pops the previous page off of the selectionHistory stack. Called when heading back to the previous page.
     */
   const removePreviousSelection = ()=>{
-    let temp = orderState;
+    let temp = props.currentOrder;
     temp.selectionHistory.pop();
+    temp.sides.pop(); //possibly not
 
     temp.numSides += 1;
 
-    setOrderState(temp);
-    console.log(orderState)
+    props.setCurrentOrder(temp);
+    console.log(props.currentOrder);
   }
 
   /* Logic for determining what the next page is depending on how many sides/entrees there are left to decide*/
   useEffect(() => {
-    if (orderState.numSides == 0) {
+    if (props.currentOrder.numSides == 0) {
       setNextPage("/entree");
     }
-    let temp = orderState;
-    temp.redirectDest = "/side";
-    setOrderState(temp);
-    console.log(orderState)
+    // let temp = props.currentOrder;
+    // temp.redirectDest = "/side";
+    // setOrderState(temp);
+    // console.log(orderState)
   }, []);
-
-  console.log("current order",orderState);
   
   useEffect(() => {
-    setOrderState(orderState);
     fetch(process.env.REACT_APP_BACKEND_URL +"/api/Inventory")
         .then((response) => response.json())
         .then((data) => setItems(data)); 
@@ -94,7 +105,6 @@ export default function Side() {
     <div className = 'centered-container'>
         <h1>Choose a side</h1>
         <div className='top-level-item-render'>
-            {console.log(items)}
             {items.map( (item) => {
               
               //we have grabbed the entire inventory, but we only want to render the sides on this particular page
@@ -112,14 +122,16 @@ export default function Side() {
         </div>
         <p>
         
-        <Link className='button-text' to={orderState.selectionHistory[orderState.selectionHistory.length - 1].page} onClick={removePreviousSelection} state={orderState}><Button variant="primary">
+        <Link className='button-text' to={obj.selectionHistory[obj.selectionHistory.length - 1].page} onClick={removePreviousSelection}><Button variant="primary">
             Previous</Button>
         </Link>
         { selectedOption &&
-          <Link className='button-text' to={nextPage} onClick={saveSelection} state={orderState}><Button variant="primary">
+          <Link className='button-text' to={nextPage} onClick={saveSelection}><Button variant="primary">
             Next</Button>
           </Link>
         }
+        {/* <Button onClick={saveSelection}>Hi</Button>
+        <Button onClick={removePreviousSelection}>Bye</Button> */}
         </p>
     </div>
   )

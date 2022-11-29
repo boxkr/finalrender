@@ -4,16 +4,22 @@ import "../css/order.css"
 import Button from 'react-bootstrap/Button'
 import '../css/Ordering.css'
 
-export default function Extra() {
+export default function Extra(props) {
 
   /**
   * These are state variables to hold the items from the api, the previous selected item, and our order object
   */
+  //for populating page
   const [items, setItems] = useState([]);
+  //for updating current order
   const [selectedOption, setSelectedOption] = useState(null);
+  //for UI
   const [lastSelectedButton, setLastUsedButton] = useState(null);
-  const [orderState, setOrderState] = useState(useLocation().state);
-  const [nextPage, setNextPage] = useState('/finalizeOrder');
+  //for navigation
+  const [nextPage, setNextPage] = useState("/finalizeOrder");
+
+  //set obj for re-rendering
+  let obj = props.currentOrder;
 
   /** 
      * HANDLE_ITEM_ADD
@@ -42,29 +48,34 @@ export default function Extra() {
     setSelectedOption(name);
   }
 
+  useEffect(() =>{
+    props.setCurrentOrder(obj);
+    console.log(props.currentOrder);
+  }, [selectedOption]) 
+
   /**
   * Pushes this page onto the selectionHistory stack, which lets you know which page was last so that you can return to it
   * when you click the back button
   */
-   const saveSelection = ()=>{
-    let temp = orderState;
+  const saveSelection = ()=>{
+    //currently only takes 1 extra item
+    let temp = props.currentOrder;
     temp.selectionHistory.push({"page": "/extra", "selection": selectedOption})
-    setOrderState(temp);
-    console.log(orderState)
+    temp.extra = selectedOption;
+    props.setCurrentOrder(temp);
   }
 
   /**
     * Pops the previous page off of the selectionHistory stack. Called when heading back to the previous page.
     */
   const removePreviousSelection = ()=>{
-    let temp = orderState;
+    let temp = props.currentOrder;
     temp.selectionHistory.pop();
-    setOrderState(temp);
-    console.log(orderState)
+    props.setCurrentOrder(temp);
+    console.log(props.currentOrder);
   }
 
   useEffect(() => {
-    setOrderState(orderState);
     fetch(process.env.REACT_APP_BACKEND_URL +"/api/Inventory")
         .then((response) => response.json())
         .then((data) => setItems(data)); 
@@ -89,11 +100,11 @@ export default function Extra() {
             })}
         </div>
         <p>
-        <Link className='button-text' to={orderState.selectionHistory[orderState.selectionHistory.length - 1].page} onClick={removePreviousSelection} state={orderState}><Button variant="primary">
+        <Link className='button-text' to={obj.selectionHistory[obj.selectionHistory.length - 1].page} onClick={removePreviousSelection}><Button variant="primary">
             Previous</Button>
         </Link>
         { selectedOption &&
-          <Link className='button-text' to={nextPage} onClick={saveSelection} state={orderState}><Button variant="primary">
+          <Link className='button-text' to={nextPage} onClick={saveSelection}><Button variant="primary">
             Next</Button>
           </Link>
         }
