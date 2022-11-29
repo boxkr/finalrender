@@ -82,7 +82,7 @@ export default function Entree() {
 
   useEffect(() => {
     setOrderState(orderState);
-    fetch("http://localhost:3000/api/Inventory")
+    fetch(process.env.BACKEND_URL + "/api/Inventory")
         .then((response) => response.json())
         .then((data) => setItems(data)); 
   }, []);

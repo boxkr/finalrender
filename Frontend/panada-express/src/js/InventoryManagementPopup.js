@@ -20,7 +20,7 @@ export default function InventoryManagementPopup(props) {
     const [restockAmount, setRestockAmount] = useState("");
     const [updater,forceUpdate] = useState("");
     useEffect(() => {
-        fetch("http://localhost:3000/api/Inventory")
+        fetch(process.env.BACKEND_URL +"/api/Inventory")
             .then((response) => response.json())
             .then((data) => setFullInventory(data)); 
     }, [updater]);
@@ -68,7 +68,7 @@ export default function InventoryManagementPopup(props) {
         let newamount = (quan+parseInt(restockAmount));
         let obj = {ID: id, Name: restockItem, ItemType: type, Calories: calories, Quantity: newamount, WholesaleCost: wc, Minimum: mn}
         console.log(obj);
-        let res = await fetch("http://localhost:3000/api/Inventory",{method: 'PUT',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)})
+        let res = await fetch(process.env.BACKEND_URL +"/api/Inventory",{method: 'PUT',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)})
         console.log(JSON.stringify(obj))
         console.log("completed",res);
 

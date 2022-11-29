@@ -70,7 +70,8 @@ export default function Size() {
 
     //calls our api, gets the json response for all the sizes
     useEffect(() => {
-        fetch("http://localhost:3000/api/Sizes")
+        console.log(process.env.REACT_APP_BACKEND_URL+"/api/Sizes")
+        fetch(process.env.REACT_APP_BACKEND_URL+"/api/Sizes")
             .then((response) => response.json())
             .then((data) => setSizes(data)); 
     }, []);

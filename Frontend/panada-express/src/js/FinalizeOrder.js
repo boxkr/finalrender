@@ -38,7 +38,7 @@ export default function FinalizeOrder() {
 
     console.log(data)
 
-    fetch('http://localhost:3000/api/FinalizeOrder', 
+    fetch(process.env.BACKEND_URL +'/api/FinalizeOrder', 
     {
       method: 'POST',
       headers: {

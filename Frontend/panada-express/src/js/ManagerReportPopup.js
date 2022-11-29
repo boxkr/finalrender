@@ -101,14 +101,14 @@ export default function InventoryManagementPopup(props) {
         console.log(salesReportStartDate);
         console.log(salesReportEndDate);
         let obj = {first: salesReportStartDate, second : "noinput"};
-        await (fetch("http://localhost:3000/api/InventoryHistoryStartDate",{method: 'POST',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)})
+        await (fetch(process.env.BACKEND_URL +"/api/InventoryHistoryStartDate",{method: 'POST',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)})
         .then((response) => response.json())
         .then((data) => (startDateSnapshot = data))); 
 
 
         //get a snapshot of inventoryhistory at last instance of enddate
         obj = {first: "noinput", second : salesReportEndDate};
-        await (fetch("http://localhost:3000/api/InventoryHistoryStartDate",{method: 'POST',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)})
+        await (fetch(process.env.BACKEND_URL +"/api/InventoryHistoryStartDate",{method: 'POST',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)})
         .then((response) => response.json())
         .then((data) => (endDateSnapshot = data)));
 
@@ -175,7 +175,7 @@ export default function InventoryManagementPopup(props) {
         let obj = {first: excessReportStartDate, second : "noinput"};
         console.log("START REQUEST")
         let fetcheddata;
-        await (fetch("http://localhost:3000/api/InventoryHistoryStartDate",{method: 'POST',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)})
+        await (fetch(process.env.BACKEND_URL +"/api/InventoryHistoryStartDate",{method: 'POST',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)})
         .then((response) => response.json())
         .then((data) => (fetcheddata = data))); 
         //console.log(curInventoryHistory)
@@ -256,7 +256,7 @@ export default function InventoryManagementPopup(props) {
     }
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/Inventory")
+        fetch(process.env.BACKEND_URL +"/api/Inventory")
             .then((response) => response.json())
             .then((data) => setCurInventory(data));
         console.log('re-rendered')
