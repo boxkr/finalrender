@@ -17,8 +17,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set REACT_APP_PORT=3001 && REACT_APP_BACKEND_URL=http://localhost:3000 && react-scripts start",
-    "product": "set REACT_APP_PORT=3001 && REACT_APP_BACKEND_URL=https://render-backend-wmen.onrender.com && react-scripts start",
+    "start": "set PORT=3001 && set REACT_APP_BACKEND_URL=http://localhost:3000&& react-scripts start",
+    "product": "set PORT=3001 && set REACT_APP_BACKEND_URL=https://render-backend-wmen.onrender.com&& react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

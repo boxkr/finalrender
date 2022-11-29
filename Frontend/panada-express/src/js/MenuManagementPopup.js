@@ -24,10 +24,10 @@ export default function MenuManagementPopup(props) {
     const [delItem, setDelItem] = useState("")
 
     useEffect(() => {
-        fetch(process.env.BACKEND_URL +"/api/Sizes")
+        fetch(process.env.REACT_APP_BACKEND_URL +"/api/Sizes")
             .then((response) => response.json())
             .then((data) => setCurrentSizes(data));
-        fetch(process.env.BACKEND_URL +"/api/Inventory")
+        fetch(process.env.REACT_APP_BACKEND_URL +"/api/Inventory")
             .then((response) => response.json())
             .then((data)=>setCurrentInventory(data))
     }, [updater]);
@@ -70,7 +70,7 @@ export default function MenuManagementPopup(props) {
         //send a patch to /sizes to change the price
         //object in the form { ID, Name, NumSides, NumEntrees, Price }
         let obj = {"ID" : id, "Name" : sizeName, "NumSides" : numsides, "NumEntrees" : numentrees, "Price" : sizePrice}
-        let res = await fetch(process.env.BACKEND_URL +"/api/Sizes",{method: 'PUT',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)})
+        let res = await fetch(process.env.REACT_APP_BACKEND_URL +"/api/Sizes",{method: 'PUT',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)})
         forceUpdate(Math.random());
         console.log("complete",res)
         alert("Finished editing size");
@@ -84,7 +84,7 @@ export default function MenuManagementPopup(props) {
         //all we need to do is create an object with the given information and send to post
         //{ Name, ItemType, Calories, Quantity, WholesaleCost, Minimum }
         let obj = {"Name" : newItemName, "ItemType" : newItemType, "Calories" : parseInt(newItemCalories), "Quantity" : parseInt(newItemQuantity), "WholesaleCost" : parseInt(newItemWC), "Minimum" : 0}
-        let res = await fetch(process.env.BACKEND_URL +"/api/Inventory",{method: 'POST',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)});
+        let res = await fetch(process.env.REACT_APP_BACKEND_URL +"/api/Inventory",{method: 'POST',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)});
         forceUpdate(Math.random())
         console.log("complete",res);
         alert("Added "+newItemName);
@@ -111,7 +111,7 @@ export default function MenuManagementPopup(props) {
         }
 
         //to delete, all we have to do is send a delete fetch to "/Inventory/:id"
-        let url = process.env.BACKEND_URL +"/api/Inventory" + "/"+id.toString();
+        let url = process.env.REACT_APP_BACKEND_URL +"/api/Inventory" + "/"+id.toString();
         let obj = {params: {id: id}};
         let res = await fetch(url,{method: 'DELETE',headers: {'Content-Type': 'application/json'},body: JSON.stringify(obj)});
         console.log("complete",res)

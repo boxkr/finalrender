@@ -38,7 +38,7 @@ export default function FinalizeOrder() {
 
     console.log(data)
 
-    fetch(process.env.BACKEND_URL +'/api/FinalizeOrder', 
+    fetch(process.env.REACT_APP_BACKEND_URL +'/api/FinalizeOrder', 
     {
       method: 'POST',
       headers: {
