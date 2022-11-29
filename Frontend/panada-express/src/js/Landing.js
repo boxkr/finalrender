@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {useState} from 'react';
 import '../css/App.css';
 import { Link } from "react-router-dom";
@@ -14,14 +14,23 @@ let welcome = "Welcome To Panda Express";
 
 // let userLanguage = 'en';
 //(languageCode)=>setUserLanguage(languageCode)
-export default function Landing() {
+export default function Landing(props) {
   const [userLanguage, setUserLanguage] = useState('en');
+  // let totalOrder = props.totalOrder;
+  useEffect(() =>{
+    let temp = props.totalOrder;
+    temp.userLanguage = userLanguage;
+    props.setTotalOrder(temp);
+    console.log(props.totalOrder);
+  }, [userLanguage]);
+
   return (
     <div className="App">
       <ReactLanguageSelect className="language-select"
         searchable={true}
         defaultLanguage='en'
         onSelect={(languageCode)=>setUserLanguage(languageCode)}
+        //selected language is saved in props.totalOrder.userLang
       ></ReactLanguageSelect>
       <Translator 
         from='en'

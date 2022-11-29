@@ -48,8 +48,8 @@ function App(props) {
                 <Landing 
                   // currentOrder = {currentOrder}
                   // setCurrentOrder = {() => this.setCurrentOrder()} 
-                  // totalOrder = {totalOrder}
-                  // setTotalOrder = {setTotalOrder}
+                  totalOrder = {totalOrder}
+                  setTotalOrder = {setTotalOrder}
                 />
                 }
               />
