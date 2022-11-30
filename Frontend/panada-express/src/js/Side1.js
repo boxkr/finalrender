@@ -52,7 +52,7 @@ export default function Side1() {
   
   useEffect(() => {
     updateOrder(order);
-    fetch("http://localhost:3000/api/Inventory")
+    fetch(process.env.REACT_APP_BACKEND_URL +"/api/Inventory")
         .then((response) => response.json())
         .then((data) => setItems(data)); 
   }, []);
