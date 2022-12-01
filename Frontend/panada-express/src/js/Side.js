@@ -79,6 +79,10 @@ export default function Side(props) {
     temp.sides.pop(); //possibly not
 
     temp.numSides += 1;
+    if(temp.sides.length != 0){
+      temp.sides.pop();
+    }
+    
 
     props.setCurrentOrder(temp);
     console.log(props.currentOrder);
@@ -103,6 +107,9 @@ export default function Side(props) {
 
   return (
     <div className = 'centered-container'>
+        <div>
+          <p className='item-text'>Size: {props.currentOrder.size}</p>
+        </div>
         <h1>Choose a side</h1>
         <div className='top-level-item-render'>
             {items.map( (item) => {

@@ -71,6 +71,8 @@ export default function Extra(props) {
   const removePreviousSelection = ()=>{
     let temp = props.currentOrder;
     temp.selectionHistory.pop();
+
+    temp.entrees.pop();
     props.setCurrentOrder(temp);
     console.log(props.currentOrder);
   }
@@ -81,8 +83,18 @@ export default function Extra(props) {
         .then((data) => setItems(data)); 
   }, []);
 
+  console.log(obj);
   return (
     <div className='centered-container'>
+        {props.currentOrder != undefined ? <div>
+          <p className='item-text'>Size: {props.currentOrder.size}</p>
+          <p className='item-text'>Side: {props.currentOrder.sides[0]}</p>
+          {obj.entrees.map((item)=>{
+            return(
+              <p key={item} className='item-text'>{item}</p>
+            )
+          })}
+        </div> : ""}
         <h1>Any Extras?</h1>
         <div className='top-level-item-render'>
           {items.map( (item) => {

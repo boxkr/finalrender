@@ -6,19 +6,25 @@ import '../css/Ordering.css'
 export default function FinalizeOrder(props) {
 
   const [orderState, setOrderState] = useState(useLocation().state);
-
+  const [refresher, forceRefresh] = useState(Math.random());
   // let totalOrder = [...orderState.totalOrder];
   // let totalOrderPrice = ('totalOrderPrice' in orderState) ? orderState.totalOrderPrice : 0;
 
   /**
   * Sets the actual order state totalOrder to the one with the current item added.
   */
+
+  const handleOrderMore=()=>{
+    let tempCurrentOrder = props.currentOrder;
+    tempCurrentOrder = {};
+    props.setCurrentOrder(tempCurrentOrder); //refreshes
+  }
+
   const addCurrentToTotalOrder = () => {
     let tempCurrentOrder = props.currentOrder;
     let tempTotalOrder = props.totalOrder;
     tempTotalOrder.orders.push(tempCurrentOrder);
     tempTotalOrder.totalPrice += tempCurrentOrder.price;
-    tempCurrentOrder = {};
     props.setCurrentOrder(tempCurrentOrder);
     props.setTotalOrder(tempTotalOrder);
     console.log("Total Order:", props.totalOrder);
@@ -81,11 +87,15 @@ export default function FinalizeOrder(props) {
   const removePreviousSelection = () => {
     let temp = props.currentOrder;
     temp.selectionHistory.pop();
+
+    temp.extra="";
+    props.totalOrder.orders.pop();
     props.setCurrentOrder(temp);
   }
 
   //Get JSX for displaying all items in the order
   let fullOrderDisplay = global_totalOrder.orders.map((singleOrder, index1) => {
+    console.log(global_totalOrder.orders.length);
     return (
       <div key={index1}>
         <h3> {singleOrder.size.toUpperCase()} </h3>
@@ -104,15 +114,15 @@ export default function FinalizeOrder(props) {
   )});
   // console.log(fullOrderDisplay)
 
-
   return (
+    
     <div className='finalize'>
         <h1>Your Order Summary</h1>
         <p>
-        <Link className='button-text' onClick={removePreviousSelection} to="/extra"><Button variant="primary">
+        <Link className='button-text' to="/extra" onClick={removePreviousSelection} ><Button variant="primary">
             Previous</Button>
         </Link>
-        <Link className='button-text' to="/size"><Button variant="primary">
+        <Link className='button-text' onClick={handleOrderMore} to="/size"><Button variant="primary">
             Order More</Button>
         </Link>
         {/* <Link className='button-text' onClick={addCurrentToTotalOrder} to="/size"><Button variant="primary">

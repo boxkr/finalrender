@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, renderMatches } from "react-router-dom"
 import "../css/order.css"
 import Button from 'react-bootstrap/Button'
 import '../css/Ordering.css'
@@ -18,6 +18,7 @@ export default function Entree(props) {
   //for navigation
   const [nextPage, setNextPage] = useState("/entree");
 
+  const [refresher, setRefresh] = useState(Math.random());
   //set obj for re-rendering
   let obj = props.currentOrder;
 
@@ -49,7 +50,7 @@ export default function Entree(props) {
   useEffect(() =>{
     props.setCurrentOrder(obj);
     console.log(props.currentOrder);
-  }, [selectedOption]) 
+  }, [selectedOption,props.currentOrder, props.currentOrder.selectionHistory]) 
 
   /**
   * Pushes this page onto the selectionHistory stack, which lets you know which page was last so that you can return to it
@@ -83,8 +84,17 @@ export default function Entree(props) {
 
     temp.numEntrees += 1;
 
+    if(temp.entrees.length != 0){
+      temp.entrees.pop()
+    }
+    if(temp.sides.length != 0){
+      temp.sides.pop();
+    }
     props.setCurrentOrder(temp);
+    setRefresh(Math.random());
     console.log(props.currentOrder);
+    console.log(obj.selectionHistory[obj.selectionHistory.length - 1].page)
+
   }
 
 
@@ -104,8 +114,20 @@ export default function Entree(props) {
         .then((data) => setItems(data)); 
   }, []);
 
+  
   return (
     <div className='centered-container'>
+
+      {props.currentOrder != undefined ? <div>
+          <p className='item-text'>Size: {props.currentOrder.size}</p>
+          <p className='item-text'>Side: {props.currentOrder.sides[0]}</p>
+          {obj.entrees.map((item)=>{
+            return(
+              <p key={item} className='item-text'>{item}</p>
+            )
+          })}
+        </div> : ""}
+        
       <h1>Choose an entree</h1>
         <div className='top-level-item-render'>
           {items.map( (item) => {
