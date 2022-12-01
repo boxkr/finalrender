@@ -34,6 +34,7 @@ export default function FinalizeOrder(props) {
 
   useEffect(() =>{
     addCurrentToTotalOrder();
+    forceRefresh(Math.random())
   }, [])
 
   // let global_currentOrder = props.currentOrder;
@@ -55,7 +56,6 @@ export default function FinalizeOrder(props) {
     // addCurrentToTotalOrder();
     console.log("order finalized");
 
-    //TODO: backend API call
     const data = {
       ServerName: global_totalOrder.serverName,
       CustomerName: global_totalOrder.userID,
@@ -114,7 +114,6 @@ export default function FinalizeOrder(props) {
         <p key={"etc"}>{singleOrder.extra}</p>
       </div>
   )});
-  // console.log(fullOrderDisplay)
 
   return (
     
