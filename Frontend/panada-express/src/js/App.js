@@ -30,7 +30,8 @@ function App(props) {
     numSides: 0,
     sides: [],
     entrees: [],
-    extra: ""
+    extra: "",
+    userLanguage: 'en'
   });
   const [totalOrder, setTotalOrder] = useState({
     serverName: "",
