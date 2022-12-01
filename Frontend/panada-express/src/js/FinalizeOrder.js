@@ -14,12 +14,14 @@ export default function FinalizeOrder(props) {
   * Sets the actual order state totalOrder to the one with the current item added.
   */
 
+  //we are ordering more, so we set current order to nothing
   const handleOrderMore=()=>{
     let tempCurrentOrder = props.currentOrder;
     tempCurrentOrder = {};
     props.setCurrentOrder(tempCurrentOrder); //refreshes
   }
 
+  //add everything to total order. we don't immediately change props.current order to {} in case we want to go back
   const addCurrentToTotalOrder = () => {
     let tempCurrentOrder = props.currentOrder;
     let tempTotalOrder = props.totalOrder;
