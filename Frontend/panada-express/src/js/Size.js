@@ -55,12 +55,14 @@ export default function Size(props) {
         temp.selectionHistory.push({"page": "/size", "selection": _size});
         temp.numEntrees = _numEntrees;
         temp.numSides = _numSides;
+        temp.userLanguage = props.totalOrder.userLanguage;
         props.setCurrentOrder(temp);
     }
 
     useEffect(() =>{
         console.log(props.currentOrder); 
         // console.log(props.totalOrder.userID)
+        console.log(props.totalOrder);
         //re-renders this useEffect function every time selectedOption is altered
     }, [selectedOption]);
 

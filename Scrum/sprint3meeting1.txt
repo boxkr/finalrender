@@ -1,0 +1,34 @@
+SPRINT 3 MEETING 1
+
+AGENDA:
+    TASK ALLOCATION AND PROGRESS
+
+
+
+KEEGAN:
+
+    -Hosting -> still working but got something working then it broke
+    -ADA Compliance -> 75%
+    -Can fill
+
+
+WILLIAM:
+
+    -Local login with database, keep that state 
+    -Rewards
+    -Display name, points number on ordering when logged in
+    
+
+
+DEREK
+
+    -Styling updates, make things less cluttered, bigger text, more structure
+
+
+BRANDON
+
+    -Make translate work for entire page
+    -Add features to google maps
+        -Nearby panda expresses
+        -Display hours and address and stuff
+    -Remove button on finalize order page

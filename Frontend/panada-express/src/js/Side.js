@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import "../css/order.css"
 import Button from 'react-bootstrap/Button'
 import '../css/Ordering.css'
+import {Translator, Translate} from 'react-auto-translate';
+import { TranslateContext } from 'react-auto-translate/lib/commonjs/translator';
 
 export default function Side(props) {
   /**
@@ -100,10 +102,14 @@ export default function Side(props) {
         .then((response) => response.json())
         .then((data) => setItems(data)); 
   }, []);
-
   return (
     <div className = 'centered-container'>
-        <h1>Choose a side</h1>
+      <Translator
+      to={props.currentOrder.userLanguage}
+      from='en'
+      googleApiKey='AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY'
+      >
+        <h1><Translate>Choose a side</Translate></h1>
         <div className='top-level-item-render'>
             {items.map( (item) => {
               
@@ -113,7 +119,7 @@ export default function Side(props) {
               }else{
                 return (
                   <div id={item.name} className="item-button" onClick={handleItemAdd} key={item.id}>
-                    <p className='non-clickable'>{item.name}</p>
+                    <p className='non-clickable'><Translate>{item.name}</Translate></p>
                   </div>
                   )
               }
@@ -123,16 +129,17 @@ export default function Side(props) {
         <p>
         
         <Link className='button-text' to={obj.selectionHistory[obj.selectionHistory.length - 1].page} onClick={removePreviousSelection}><Button variant="primary">
-            Previous</Button>
+            <Translate>Previous</Translate></Button>
         </Link>
         { selectedOption &&
           <Link className='button-text' to={nextPage} onClick={saveSelection}><Button variant="primary">
-            Next</Button>
+            <Translate>Next</Translate></Button>
           </Link>
         }
         {/* <Button onClick={saveSelection}>Hi</Button>
         <Button onClick={removePreviousSelection}>Bye</Button> */}
         </p>
+        </Translator>
     </div>
   )
 }
