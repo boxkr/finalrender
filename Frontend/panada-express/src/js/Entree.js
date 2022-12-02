@@ -73,7 +73,7 @@ export default function Entree(props) {
     window.scrollTo({top:0, left:0, behavior: 'smooth'});
     document.getElementById(selectedOption).className = "item-button";
   }
-
+  
   /**
     * Pops the previous page off of the selectionHistory stack. Called when heading back to the previous page.
     */
@@ -98,8 +98,8 @@ export default function Entree(props) {
   }, []);
 
   useEffect(() => {
-    //setOrderState(orderState);
-    fetch(process.env.REACT_APP_BACKEND_URL + "/api/Inventory")
+    // setOrderState(orderState);
+    fetch("http://localhost:3000/api/Inventory")
         .then((response) => response.json())
         .then((data) => setItems(data)); 
   }, []);

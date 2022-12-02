@@ -1,4 +1,4 @@
-import {GoogleLogin} from 'react-google-login';
+import {GoogleLogout} from 'react-google-login';
 
 // const fs = require('fs');
 // const client = fs.readFileSync('../client_secret.txt', 'utf8').split(/\r?\n/);
@@ -12,8 +12,8 @@ function LogoutButton(){
 
     return(
         <div id='singOutButton'>
-            <GoogleLogin
-                clientId={clientID}
+            <GoogleLogout
+                // clientId={clientID}
                 buttonText={"Logout"}
                 onLogoutSuccess={onSuccess}
             />

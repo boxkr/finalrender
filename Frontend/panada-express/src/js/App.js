@@ -37,7 +37,8 @@ function App(props) {
     userID: "Guest",
     userLanguage: "en",
     orders: [],
-    totalPrice: 0
+    totalPrice: 0,
+    userPoints: 0
   })
   return (
     <div className="App">
