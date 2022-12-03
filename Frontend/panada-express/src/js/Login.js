@@ -79,7 +79,10 @@ export default function Login(props) {
             totalOrder = {totalOrderPass}
             setTotalOrder = {setTotalOrderPass}
           />
-          <LogoutButton />
+          <LogoutButton 
+            totalOrder = {totalOrderPass}
+            setTotalOrder = {setTotalOrderPass}
+          />
           <br></br>
           <form>
               <label>
