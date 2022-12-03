@@ -30,14 +30,16 @@ function App(props) {
     numSides: 0,
     sides: [],
     entrees: [],
-    extra: ""
+    extra: "",
+    userLanguage: 'en'
   });
   const [totalOrder, setTotalOrder] = useState({
     serverName: "",
     userID: "Guest",
     userLanguage: "en",
     orders: [],
-    totalPrice: 0
+    totalPrice: 0,
+    userPoints: 0
   })
   return (
     <div className="App">

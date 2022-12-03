@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import '../css/Login.css';
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 import {useEffect} from 'react';
@@ -12,8 +12,50 @@ import {gapi} from 'gapi-script';
 
 const clientID = "726483990366-aja05ddbfl17kvjes627pg8tvge9f4re.apps.googleusercontent.com"
 
-
 export default function Login(props) {
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState({firstname: "Guest", customerpoints: 0});
+
+  const navigate = useNavigate();
+
+  const getUsername = (e) =>{
+    setUsername(e.target.value);
+  }
+
+  const getPassword = (e) =>{
+    setPassword(e.target.value);
+  }
+
+  const login = () =>{
+    const data = {
+      Username: username,
+      Password: password
+    }
+
+    fetch(process.env.REACT_APP_BACKEND_URL +'/api/CustomerLogin', 
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => setUserData(data))
+      .catch((error) => alert("Failed to login. Please try again."));
+  }
+
+  useEffect(() => {
+    console.log("Login success")
+    let temp = props.totalOrder;
+    temp.userID = userData.firstname;
+    temp.userPoints = userData.customerpoints;
+    props.setTotalOrder(temp);
+    const goToHome = () => navigate('/login');
+    goToHome();
+  }, [userData])
 
   useEffect(() => {
     function start(){
@@ -28,50 +70,57 @@ export default function Login(props) {
 
   let totalOrderPass = props.totalOrder;
   let setTotalOrderPass = props.setTotalOrder;
-
-  return (
-    <div className='login-div'>
-        <h1>Login to your Panda Express account</h1>
-        <br></br>
-        <LoginButton 
-          totalOrder = {totalOrderPass}
-          setTotalOrder = {setTotalOrderPass}
-        />
-        <LogoutButton />
-        <br></br>
-        <form>
-            <label>
-                <p>Username</p>
-                <input type="text" />
-            </label>
-            <br></br>
-            <label>
-                <p>Password</p>
-                <input type = "password" /> 
-            </label>
-            <div>
+  if (props.totalOrder.userID == "Guest"){
+    return (
+      <div className='login-div'>
+          <h1>Login to your Panda Express account</h1>
+          <br></br>
+          <LoginButton 
+            totalOrder = {totalOrderPass}
+            setTotalOrder = {setTotalOrderPass}
+          />
+          <LogoutButton />
+          <br></br>
+          <form>
+              <label>
+                  <p>Username</p>
+                  <input type="text" onChange={getUsername}/>
+              </label>
               <br></br>
-              <Link to="/size"><Button variant="primary">
-              Submit</Button>
-              </Link>
-            </div>
-        </form>
-        <p className='create-account-text'>
-          Dont have a Panda Express acount? <br></br>
-          <Link className='button-text'to="/createaccount">Click here to create one.</Link>
-        </p>
-        <p className='return'>
-          <br></br>
-          <br></br>
-          <br></br>
-          
-          <Link className='button-text' style={{ textDecoration: 'none' }} to="/"><Button variant="secondary">
-            Return to landing page</Button>
-          </Link>
-          <br></br>
-          <br></br>
-          <Link className='alt-login'to="/managerlogin">Click here to login as a manager.</Link>      
-        </p>
-    </div>
-  )
+              <label>
+                  <p>Password</p>
+                  <input type = "password" onChange={getPassword}/> 
+              </label>
+              <div>
+                <br></br>
+                <Button variant="primary" onClick={login}>
+                  Submit
+                </Button>
+              </div>
+          </form>
+          <p className='create-account-text'>
+            Dont have a Panda Express acount? <br></br>
+            <Link className='button-text'to="/createaccount">Click here to create one.</Link>
+          </p>
+          <p className='return'>
+            <br></br>
+            <br></br>
+            <br></br>
+            
+            <Link className='button-text' style={{ textDecoration: 'none' }} to="/"><Button variant="secondary">
+              Return to landing page</Button>
+            </Link>
+            <br></br>
+            <br></br>
+            <Link className='alt-login'to="/managerlogin">Click here to login as a manager.</Link>      
+          </p>
+      </div>
+    )
+  }
+  else{
+    return (
+      <Navigate to='/'/>
+    )
+  }
+  
 }
