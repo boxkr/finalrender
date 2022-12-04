@@ -30,11 +30,10 @@ export default function GuestLanding(props){
                 <Link className='button-text' to="/Login"><Button variant="primary">
                     <Translate>Login</Translate></Button>
                 </Link>
-                <br></br>
                 <Link className='button-text' to="/size" state={userLanguage}><Button variant="primary">
                     <Translate>Order Now!</Translate></Button>
                     </Link>
-                <br></br>
+                
                 <Link className='button-text' to="/Location"><Button variant="warning">
                     <Translate>View our location on a map</Translate></Button>
                 </Link>
