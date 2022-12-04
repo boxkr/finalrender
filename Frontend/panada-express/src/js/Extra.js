@@ -86,15 +86,7 @@ export default function Extra(props) {
   console.log(obj);
   return (
     <div className='centered-container'>
-        {props.currentOrder != undefined ? <div>
-          <p className='item-text'>Size: {props.currentOrder.size}</p>
-          <p className='item-text'>Side: {props.currentOrder.sides[0]}</p>
-          {obj.entrees.map((item)=>{
-            return(
-              <p key={item} className='item-text'>{item}</p>
-            )
-          })}
-        </div> : ""}
+
         <h1>Any Extras?</h1>
         <div className='top-level-item-render'>
           {items.map( (item) => {

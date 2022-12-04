@@ -108,9 +108,6 @@ export default function Side(props) {
   }, []);
   return (
     <div className = 'centered-container'>
-        <div>
-          <p className='item-text'>Size: {props.currentOrder.size}</p>
-        </div>
       <Translator
       to={props.currentOrder.userLanguage}
       from='en'

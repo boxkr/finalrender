@@ -3,7 +3,8 @@ html{
 }
 
 .centered-container{
-    background-color:#C02827 !important; 
+    background-color:#C02827 !important;
+    min-height: 100vh;
 }
 
 .top-level-item-render{
@@ -29,4 +30,8 @@ p {
 
 .finalize{
     background-color: #C02827;
+}
+
+.full-order-display {
+    color: white;
 }
