@@ -1,0 +1,25 @@
+SPRINT 3 MEETING 2
+
+AGENDA:
+    WHERE ARE WE AT ON TASKS
+    DOES ANYONE NEED HELP / SWITCH
+    WANT TO BE DONE BY MONDAY
+
+DEREK:
+
+    -Will be starting frontend changes and finishing this weekend
+
+WILLIAM:
+
+    -Finished authentication for local (non-oauth) accounts
+    -Still need to add a user-page & rewards system
+
+BRANDON:
+
+    -Adding store hours to google maps page
+
+KEEGAN:
+
+    -Got hosting working
+    -Will be doing ADA compliance today
+    -Finished a feature where you can see your order while ordering
