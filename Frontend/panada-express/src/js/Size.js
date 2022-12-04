@@ -101,7 +101,7 @@ export default function Size(props) {
                 <div id={size.name} numentrees={size.numentrees} numsides={size.numsides} price={size.price} className="item-button" onClick={handleItemAdd} key={size.id}>  
                     <p className='non-clickable'><Translate>{size.name}</Translate></p>
 
-                    <p className='item-price non-clickable'>${size.price}</p>
+                    <p className='item-price non-clickable'>${size.price.toFixed(2)}</p>
                 </div>
             ))}
         </div>

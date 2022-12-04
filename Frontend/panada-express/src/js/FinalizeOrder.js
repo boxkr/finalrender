@@ -99,7 +99,7 @@ export default function FinalizeOrder(props) {
   let fullOrderDisplay = global_totalOrder.orders.map((singleOrder, index1) => {
     console.log(global_totalOrder.orders.length);
     return (
-      <div key={index1}>
+      <div class="full-order-display" key={index1}>
         <h3> {singleOrder.size.toUpperCase()} </h3>
         {
           singleOrder.sides.map((side, index2) => (

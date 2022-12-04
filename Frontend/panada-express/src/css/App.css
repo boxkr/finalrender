@@ -26,6 +26,11 @@ body {
   margin-right: 0;
   padding-left: 0;
   padding-right: 0;
+  color: white;
+}
+
+.flag-select__options * {
+  color: black;
 }
 
 .App-header {
@@ -55,7 +60,7 @@ body {
 }
 .language-select{
   background-color: #C02827;
-  color: black;
+  color: white;
   width: 100%;
 }
 
