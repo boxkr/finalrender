@@ -142,7 +142,7 @@ export default function FinalizeOrder(props) {
       googleApiKey='AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY'
       >
         <h1><Translate>Your Order Summary</Translate></h1>
-        <h2><Translate>Total Price: {totalPrice}</h2>
+        <h2><Translate>Total Price: {totalPrice}</Translate></h2>
         <p>
         <Link className='button-text' to="/extra" onClick={removePreviousSelection} ><Button variant="primary">
             <Translate>Previous</Translate></Button>
