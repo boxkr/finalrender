@@ -24,7 +24,7 @@ export default function CustomerLanding(props){
                 googleApiKey='AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY'
             >
             <div className='customerInfo'>
-                <p>Hello {userName}! You currently have {userPoints} Points</p>
+                <p><Translate>Hello {userName}! You currently have {userPoints} Points</Translate></p>
                 <br></br>
             </div>
             <header className="App-header">
