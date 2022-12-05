@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import {Link, useLocation} from "react-router-dom"
 import Button from 'react-bootstrap/Button'
 import '../css/Ordering.css'
+import {Translator, Translate} from 'react-auto-translate';
+import { TranslateContext } from 'react-auto-translate/lib/commonjs/translator';
 
 export default function FinalizeOrder(props) {
 
@@ -100,40 +102,52 @@ export default function FinalizeOrder(props) {
     console.log(global_totalOrder.orders.length);
     return (
       <div class="full-order-display" key={index1}>
-        <h3> {singleOrder.size.toUpperCase()} </h3>
+        <Translator
+      to={props.currentOrder.userLanguage}
+      from='en'
+      googleApiKey='AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY'
+      >
+        <h3> <Translate>{singleOrder.size.toUpperCase()} </Translate></h3>
         {
           singleOrder.sides.map((side, index2) => (
-            <p key={index2}>{side}</p>
+            <p key={index2}><Translate>{side}</Translate></p>
           ))
         } 
         {
           singleOrder.entrees.map((entree, index3) => (
-            <p key={index3}>{entree}</p>
+            <p key={index3}><Translate>{entree}</Translate></p>
           ))
         }
-        <p key={"etc"}>{singleOrder.extra}</p>
+        <p key={"etc"}><Translate>{singleOrder.extra}</Translate></p>
+        </Translator>
       </div>
   )});
 
   return (
     
     <div className='finalize'>
-        <h1>Your Order Summary</h1>
+      <Translator
+      to={props.currentOrder.userLanguage}
+      from='en'
+      googleApiKey='AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY'
+      >
+        <h1><Translate>Your Order Summary</Translate></h1>
         <p>
         <Link className='button-text' to="/extra" onClick={removePreviousSelection} ><Button variant="primary">
-            Previous</Button>
+            <Translate>Previous</Translate></Button>
         </Link>
         <Link className='button-text' onClick={handleOrderMore} to="/size"><Button variant="primary">
-            Order More</Button>
+            <Translate>Order More</Translate></Button>
         </Link>
         {/* <Link className='button-text' onClick={addCurrentToTotalOrder} to="/size"><Button variant="primary">
             Order More</Button>
         </Link> */}
         <Link className='button-text' onClick={handleFinalize} to="/" /* TODO: Payment page */ ><Button variant="success">
-            Finalize Order</Button>
+            <Translate>Finalize Order</Translate></Button>
         </Link>
         </p>
         { fullOrderDisplay }
+        </Translator> 
     </div>
   )
 }
