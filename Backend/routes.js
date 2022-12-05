@@ -320,16 +320,22 @@ router.post('/FinalizeOrder', async function(req, res, next) {
   for (let i = 0; i < OrderDetails.length; i++) {
     ordered_items = ordered_items.concat(OrderDetails[i].Items);
   }
+  console.log(ordered_items);
+  console.log(OrderDetails);
 
   ordered_item_count = {};
   for (let index in ordered_items) {
     ordered_item_count[ordered_items[index]] = ordered_item_count[ordered_items[index]] + 1 || 1;
   }
 
+  console.log(ordered_item_count);
+
+
   for (const [item_name, count] of Object.entries(ordered_item_count)) {
     //Get current quantity of each item
     await client.query('SELECT * FROM Inventory WHERE Name=$1', [item_name], async (select_error, select_results) => {
       if (select_error) {
+        console.log("SELECT ERROR")
         await client.query('ROLLBACK');
         throw select_error; 
       }
@@ -337,6 +343,7 @@ router.post('/FinalizeOrder', async function(req, res, next) {
       //Update each item with new quantity
       await client.query("UPDATE Inventory SET Quantity=$1 WHERE Name=$2", [parseInt(select_results.rows[0].quantity) - count, item_name], async (update_error, update_results) => {
         if (update_error) {
+          console.log("UPDATE ERROR")
           await client.query('ROLLBACK');
           throw update_error; 
         }

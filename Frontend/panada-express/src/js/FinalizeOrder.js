@@ -9,6 +9,7 @@ export default function FinalizeOrder(props) {
 
   const [orderState, setOrderState] = useState(useLocation().state);
   const [refresher, forceRefresh] = useState(Math.random());
+  const [totalPrice, setTotalPrice] = useState(-1);
   // let totalOrder = [...orderState.totalOrder];
   // let totalOrderPrice = ('totalOrderPrice' in orderState) ? orderState.totalOrderPrice : 0;
 
@@ -19,7 +20,7 @@ export default function FinalizeOrder(props) {
   //we are ordering more, so we set current order to nothing
   const handleOrderMore=()=>{
     let tempCurrentOrder = props.currentOrder;
-    tempCurrentOrder = {};
+    tempCurrentOrder = tempCurrentOrder = {'entrees' : [], 'extra': "", 'numEntrees': 0, 'numSides': 0, 'price': 0, 'selectionHistory': [], 'sides': [], 'size': "", 'userLanguage': ""};
     props.setCurrentOrder(tempCurrentOrder); //refreshes
   }
 
@@ -31,7 +32,9 @@ export default function FinalizeOrder(props) {
     tempTotalOrder.totalPrice += tempCurrentOrder.price;
     props.setCurrentOrder(tempCurrentOrder);
     props.setTotalOrder(tempTotalOrder);
+    setTotalPrice(props.totalOrder.totalPrice);
     console.log("Total Order:", props.totalOrder);
+
   }
 
   useEffect(() =>{
@@ -54,7 +57,7 @@ export default function FinalizeOrder(props) {
   /**
   * Finalizes the order.
   */
-  const handleFinalize = () => {
+  const handleFinalize = async () => {
     // addCurrentToTotalOrder();
     console.log("order finalized");
 
@@ -67,7 +70,7 @@ export default function FinalizeOrder(props) {
 
     console.log(data)
 
-    fetch(process.env.REACT_APP_BACKEND_URL +'/api/FinalizeOrder', 
+    await fetch(process.env.REACT_APP_BACKEND_URL +'/api/FinalizeOrder', 
     {
       method: 'POST',
       headers: {
@@ -75,13 +78,19 @@ export default function FinalizeOrder(props) {
       },
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
+      //.then((response) => response.json())
       .then((data) => {
         console.log('Success:', data);
       })
       .catch((error) => {
         console.error('Error:', error);
       });
+    
+      //reset everything
+      let tempTotalOrder = {};
+      let tempCurrentOrder = {'entrees' : [], 'extra': "", 'numEntrees': 0, 'numSides': 0, 'price': 0, 'selectionHistory': [], 'sides': [], 'size': "", 'userLanguage': ""};
+      props.setCurrentOrder(tempCurrentOrder);
+      props.setTotalOrder(tempTotalOrder);
 
   }
 
@@ -98,6 +107,7 @@ export default function FinalizeOrder(props) {
   }
 
   //Get JSX for displaying all items in the order
+
   let fullOrderDisplay = global_totalOrder.orders.map((singleOrder, index1) => {
     console.log(global_totalOrder.orders.length);
     return (
@@ -132,6 +142,7 @@ export default function FinalizeOrder(props) {
       googleApiKey='AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY'
       >
         <h1><Translate>Your Order Summary</Translate></h1>
+        <h2><Translate>Total Price: {totalPrice}</h2>
         <p>
         <Link className='button-text' to="/extra" onClick={removePreviousSelection} ><Button variant="primary">
             <Translate>Previous</Translate></Button>
