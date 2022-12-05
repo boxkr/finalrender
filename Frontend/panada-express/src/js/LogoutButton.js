@@ -15,7 +15,7 @@ function LogoutButton(props){
         <div id='singOutButton'>
             <GoogleLogout
                 // clientId={clientID}
-                buttonText={"Logout"}
+                buttonText={"Logout with Google"}
                 onLogoutSuccess={onSuccess}
             />
         </div>

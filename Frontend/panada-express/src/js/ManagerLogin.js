@@ -37,7 +37,6 @@ export default function ManagerLogin() {
           </Link>
           <br></br>
           <br></br>
-          <Link className='alt-login'to="/login">Click here to return to customer login.</Link>  
         </p>
     </div>
   )

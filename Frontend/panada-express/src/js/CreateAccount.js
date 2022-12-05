@@ -34,7 +34,7 @@ export default function CreateAccount() {
       Username: username,
       Password: password
     }
-
+    console.log(process.env.REACT_APP_BACKEND_URL)
     fetch(process.env.REACT_APP_BACKEND_URL + '/api/RegisterCustomerAccount',
       {
         method: 'POST',

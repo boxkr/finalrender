@@ -19,7 +19,7 @@ function LoginButton(props){
         <div id = "singInButton">
             <GoogleLogin
                 clientId = {clientID}
-                buttonText = "Login"
+                buttonText = "Log in with Google!"
                 onSuccess = {onSuccess}
                 onFailure = {onFailure}
                 cookiePolicy = {'single_host_origin'}

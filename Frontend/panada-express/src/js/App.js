@@ -17,6 +17,7 @@ import Extra from "./Extra";
 import Drink from "./Drink";
 import FinalizeOrder from "./FinalizeOrder";
 import Manager from "./Manager"
+import LoginStarter from "./LoginStarter"
 import RedirectPage from "./RedirectPage"
 
 // export const contextContainer = React.createContext();
@@ -155,6 +156,7 @@ function App(props) {
                 }
               /> */}
               <Route path='/Location' element = {<Location />} />
+              <Route path='/LoginStarter' element = {<LoginStarter />} />
             </Routes>
         </BrowserRouter>
       {/* </contextContainer.Provider> */}

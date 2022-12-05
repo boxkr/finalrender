@@ -114,8 +114,7 @@ export default function Login(props) {
               Return to landing page</Button>
             </Link>
             <br></br>
-            <br></br>
-            <Link className='alt-login'to="/managerlogin">Click here to login as a manager.</Link>      
+            <br></br>  
           </p>
       </div>
     )
