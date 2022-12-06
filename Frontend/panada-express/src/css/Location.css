@@ -3,11 +3,19 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    color: white;
   }
 
 .map{
-  height: 1000px;
-  width: 100%;
+  height: 600px;
+  width: 50%;
+  float: right;
+}
+
+.store-info{
+  height: 600px;
+  width: 50%;
+  float: left;
 }
 .map-header{
   background-color:#C02827;
@@ -25,4 +33,8 @@
   color: #C02827;
   height: 50px;
   width: auto;
+}
+
+a{
+  color: white;
 }

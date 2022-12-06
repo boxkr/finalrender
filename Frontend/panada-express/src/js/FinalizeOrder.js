@@ -128,10 +128,13 @@ export default function FinalizeOrder(props) {
     props.setCurrentOrder(temp);
   }
 
+  const handleRemoveItem = () => {
+    props.orders.pop();
+  }
   //Get JSX for displaying all items in the order
 
   let fullOrderDisplay = global_totalOrder.orders.map((singleOrder, index1) => {
-    console.log(global_totalOrder.orders.length);
+    console.log(global_totalOrder.orders.length); 
     return (
       <div class="full-order-display" key={index1}>
         <Translator
@@ -139,7 +142,7 @@ export default function FinalizeOrder(props) {
       from='en'
       googleApiKey='AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY'
       >
-        <h3> <Translate>{singleOrder.size.toUpperCase()} </Translate></h3>
+        <h3> <Translate>{singleOrder.size.toUpperCase()}</Translate></h3>
         {
           singleOrder.sides.map((side, index2) => (
             <p key={index2}><Translate>{side}</Translate></p>
@@ -151,6 +154,10 @@ export default function FinalizeOrder(props) {
           ))
         }
         <p key={"etc"}><Translate>{singleOrder.extra}</Translate></p>
+        {/* <Button variant="outline-light">Remove {singleOrder.size}</Button>{handleRemoveItem} */}
+        {singleOrder.size != '' && <Link className='button-text' onClick={handleRemoveItem} /* TODO: Payment page */ ><Button variant="outline-light">
+            <Translate>Remove {singleOrder.size}</Translate></Button>
+        </Link>}
         </Translator>
       </div>
   )});
