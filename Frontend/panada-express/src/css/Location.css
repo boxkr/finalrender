@@ -6,8 +6,15 @@
   }
 
 .map{
-  height: 1000px;
-  width: 100%;
+  height: 600px;
+  width: 50%;
+  float: right;
+}
+
+.store-info{
+  height: 600px;
+  width: 50%;
+  float: left;
 }
 .map-header{
   background-color:#C02827;

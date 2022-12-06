@@ -8,9 +8,17 @@ import '../css/Location.css'
 import GoogleMapReact from 'google-map-react';
 // import { Marker } from '@react-google-maps/api';
 import { BsFillPinMapFill } from 'react-icons/bs';
+import googleMapReact from 'google-map-react';
+
+
+const request = {
+  placeID: "ChIJXXBI75iDRoYRsfgNW3cJV7c",
+  fields: ["name", "formatted_address", "place_id", "geometry"],
+};
 
 
 
+//Place ID ChIJXXBI75iDRoYRsfgNW3cJV7c
 // KEY AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY
 export default function Location() {
   const defaultProps = {
@@ -29,6 +37,7 @@ export default function Location() {
             Return to landing page</Button>
           </Link>
         </div>
+        <div className='map'>
         <GoogleMapReact
           bootstrapURLKeys={{key: "AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY"}}
           defaultCenter={defaultProps.center}
@@ -41,6 +50,10 @@ export default function Location() {
         />
         
         </GoogleMapReact>
+        </div>
+        <div className='store-info'>
+          <h1>Location info</h1>
+        </div>
       </div>
      )
    }
