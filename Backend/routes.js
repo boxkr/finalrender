@@ -128,6 +128,13 @@ router.get('/OrderHistory', function(req, res, next) {
   });
 });
 
+router.get('/OrderHistoryLast', function(req, res, next) {
+  client.query('SELECT * FROM OrderHistory WHERE id IN(SELECT id FROM OrderHistory ORDER BY id DESC LIMIT 10)', (error, results) => {
+    if (error) { throw error; }
+    res.status(200).json(results.rows);
+  });
+});
+
 router.post('/OrderHistory', function(req, res, next) {
   const { Date, ServerName, CustomerName, TotalPrice, OrderDetails } = req.body;
 
@@ -315,20 +322,51 @@ router.post('/FinalizeOrder', async function(req, res, next) {
     }
   });
 
+  //get current inventory for use later
+  let curInventory;
+  let lastid = -1;
+  let jsonInventory = {};
+  await client.query("SELECT * FROM InventoryHistory WHERE id=(SELECT MAX(id) FROM InventoryHistory)",async (err, result)=>{
+    if(err){
+      console.log("ERROR IN GETTING LAST INVENTORYHISTORY");
+      await client.query("ROLLBACK");
+      throw err;
+    }
+    
+    console.log("this is res: ",result);
+    curInventory=result.rows[0].currentinventory;
+    lastid=result.rows[0].id;
+    console.log("this is res inventory",curInventory);
+    console.log("this is res lastid: ",lastid);
+    let cinventory = "";
+    for(let i = 0; i < curInventory.length; i++){
+      if(curInventory[i] == "'"){
+
+          cinventory+="\"";
+      }else{
+          cinventory+=curInventory[i];
+      }
+    }
+    console.log("cinventory:",cinventory)
+    jsonInventory = JSON.parse(cinventory);
+
+  });
+
+
   //Inventory Update
   ordered_items = [];
   for (let i = 0; i < OrderDetails.length; i++) {
     ordered_items = ordered_items.concat(OrderDetails[i].Items);
   }
-  console.log(ordered_items);
-  console.log(OrderDetails);
+  console.log("this is ordered items: ",ordered_items);
+  console.log("this is orderdetails",OrderDetails);
 
   ordered_item_count = {};
   for (let index in ordered_items) {
     ordered_item_count[ordered_items[index]] = ordered_item_count[ordered_items[index]] + 1 || 1;
   }
 
-  console.log(ordered_item_count);
+  console.log("this is ordererd item count: ",ordered_item_count);
 
 
   for (const [item_name, count] of Object.entries(ordered_item_count)) {
@@ -348,10 +386,26 @@ router.post('/FinalizeOrder', async function(req, res, next) {
           throw update_error; 
         }
       })
+
+      jsonInventory[item_name]-=count;
+      console.log("updating...", jsonInventory)
+      for(let item in jsonInventory){
+        if(!jsonInventory[item]){
+          
+          delete jsonInventory[item]
+        }
+      }
     });
   }
+  //Update inventoryHistory with this new inventory segment
+ 
   
   await client.query('COMMIT');
+  await client.query('INSERT INTO InventoryHistory (Date, CurrentInventory) VALUES (CURRENT_DATE, $1)', [JSON.stringify(jsonInventory)], (error, results) => {
+    if (error) { throw error; }
+  })
+  await client.query('COMMIT');
+  console.log("D O N E",jsonInventory)
   res.sendStatus(201);
 });
 
@@ -366,6 +420,29 @@ router.post('/EmployeeLogin', function(req, res, next) {
     else {
       res.sendStatus(401);
     }
+  });
+});
+
+router.put('/AddUserPoints', function (req, res, next) {
+
+  const {Username,NumPoints} = req.body;
+  console.log("BODY",req.body)
+  let curpoints = -1;
+  //first see how many points they currently have
+  client.query("SELECT customerpoints FROM customeraccounts WHERE username=$1", [Username], (error, results)=>{
+    if(error){console.log("ERROR GETTING INITIAL ACCOUNT INTO TO ADD POINTS");throw error;}
+    curpoints = results.rows[0].customerpoints;
+    console.log(results);
+  });
+
+  
+  //then update with number of points
+  let newpointsnumber = curpoints + NumPoints;
+  console.log(curpoints,NumPoints);
+  console.log(newpointsnumber,Username);
+  client.query("UPDATE customeraccounts SET customerpoints=$1 WHERE username=$2",[newpointsnumber,Username],(error, results)=>{
+    if(error){console.log("ERROR UPDATING CUSTOMER POINTS"); throw error;}
+    res.sendStatus(200).json(results.rows[0]);
   });
 });
 
