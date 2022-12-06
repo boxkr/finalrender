@@ -124,6 +124,60 @@ export default function FinalizeOrder(props) {
 
   }
 
+  const handleFinalizeWithPoints=async()=>{
+
+    console.log("order finalized with points");
+
+    const data = {
+      ServerName: global_totalOrder.serverName,
+      CustomerName: global_totalOrder.userID,
+      TotalPrice: global_totalOrder.totalPrice,
+      OrderDetails: totalOrder
+    }
+
+    console.log(data)
+
+    await fetch(process.env.REACT_APP_BACKEND_URL +'/api/FinalizeOrder', 
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      //.then((response) => response.json())
+      .then((data) => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    
+      //if we're a logged in account, we want to add points to our account
+      let pointstoadd = 0;
+      if(global_totalOrder.userID && global_totalOrder.userID != "Guest"){
+
+        console.log("USER FOUND, UPDATING POINTS")
+        //get the points to add, and send it off to the sever route.
+        pointstoadd = -1000;
+        console.log("POINTS TO ADD:",pointstoadd);
+        const ptsData = {Username : global_totalOrder.userID, NumPoints: pointstoadd}
+        await fetch(process.env.REACT_APP_BACKEND_URL +'/api/AddUserPoints',{method: "PUT", headers: {'Content-Type': 'application/json',},body: JSON.stringify(ptsData),})
+        .then((data) => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+
+      }
+    //reset everything
+    let tempTotalOrder = {'orders':[],'serverName':"",'totalPrice': 0,'userID': global_totalOrder.userID, 'userLanguage': "en", 'userPoints':global_totalOrder.userPoints-1000};
+    let tempCurrentOrder = {'entrees' : [], 'extra': "", 'numEntrees': 0, 'numSides': 0, 'price': 0, 'selectionHistory': [], 'sides': [], 'size': "", 'userLanguage': ""};
+    props.setCurrentOrder(tempCurrentOrder);
+    props.setTotalOrder(tempTotalOrder);
+  }
+
   /**
     * Pops the previous page off of the selectionHistory stack. Called when heading back to the previous page.
     */
@@ -181,6 +235,8 @@ export default function FinalizeOrder(props) {
       >
         <h1><Translate>Your Order Summary</Translate></h1>
         <h2><Translate>Total Price: {totalPrice}</Translate></h2>
+        {props.totalOrder.userID && props.totalOrder.userID != "Guest" && props.totalOrder.userPoints >= 1000 ? <h3 className='points-declare'>With your points you're eligible for half off! New Price: {totalPrice * 0.5}</h3> : ""}
+        {props.totalOrder.userID && props.totalOrder.userID != "Guest" ? <h5>Your points: {props.totalOrder.userPoints}</h5> : ""}
         <p>
         <Link className='button-text' to="/extra" onClick={removePreviousSelection} ><Button variant="primary">
             <Translate>Previous</Translate></Button>
@@ -194,6 +250,11 @@ export default function FinalizeOrder(props) {
         <Link className='button-text' onClick={handleFinalize} to="/" /* TODO: Payment page */ ><Button variant="success">
             <Translate>Finalize Order</Translate></Button>
         </Link>
+        { props.totalOrder.userID && props.totalOrder.userID != "Guest" && props.totalOrder.userPoints >= 1000 ?
+        <Link className='button-text' onClick={handleFinalizeWithPoints} to="/" /* TODO: Payment page */ ><Button variant="success">
+            <Translate>Finalize Order with Points</Translate></Button>
+        </Link> : ""
+        }
         <Link className='button-text' onClick={handleLeave} to="/" /* TODO: Payment page */ ><Button variant="secondary">
             <Translate>Go back to home</Translate></Button>
         </Link>
