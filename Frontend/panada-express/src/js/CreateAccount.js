@@ -56,6 +56,8 @@ export default function CreateAccount() {
   }
 
   return (
+    <div>
+      <title>Create an Account</title>
     <div className='login-div'>
         <h1>Create a new Panda Express Account</h1>
         <br></br>
@@ -98,6 +100,7 @@ export default function CreateAccount() {
           Return to landing page</Button>
         </Link>
         </p>
+    </div>
     </div>
   )
 }

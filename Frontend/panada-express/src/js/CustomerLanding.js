@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Translator, Translate} from 'react-auto-translate';
 import logo from '../images/Panda-Express-Logo.png';
 import {Button} from 'react-bootstrap';
@@ -10,6 +10,7 @@ export default function CustomerLanding(props){
     const userLanguage = props.userLanguage;
     const userName = props.totalOrder.userID;
     const userPoints = props.totalOrder.userPoints
+    console.log(props);
     return (
         <div className="App">
             <ReactLanguageSelect className="language-select"

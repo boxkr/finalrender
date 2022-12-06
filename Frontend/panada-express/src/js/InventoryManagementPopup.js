@@ -81,8 +81,8 @@ export default function InventoryManagementPopup(props) {
     
     console.log(fullInventory)
     return (
-
         <div className="management-container">
+            <title>inventory management page</title>
             <Button onClick={handleClose}>Close</Button>
             <h1 className="management-header">Inventory Management</h1>
             <div className='restock-view'>

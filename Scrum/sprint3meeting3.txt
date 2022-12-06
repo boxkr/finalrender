@@ -21,3 +21,4 @@ KEEGAN:
 
     -Need to finish manager styles, a bug with manager reports, and points
     -Maybe want to offset pictures to someone
+    -finalize order twice doesnt work

@@ -22,6 +22,8 @@ export default function Location() {
     zoom: 15
   };
     return (
+      <div>
+            <title>Location component</title>
       <div style={{height: '100vh', width: '100%' }}>
         <div className="map-header">
           <header>View our location on a map</header>
@@ -41,6 +43,7 @@ export default function Location() {
         />
         
         </GoogleMapReact>
+      </div>
       </div>
      )
    }

@@ -16,7 +16,7 @@ export default function Login(props) {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [userData, setUserData] = useState({firstname: "Guest", customerpoints: 0});
+  const [userData, setUserData] = useState({firstname: "Guest", customerpoints: 0, username: "Guest"});
 
   const navigate = useNavigate();
 
@@ -50,7 +50,8 @@ export default function Login(props) {
   useEffect(() => {
     console.log("Login success")
     let temp = props.totalOrder;
-    temp.userID = userData.firstname;
+    temp.firstname = userData.firstname;
+    temp.userID = userData.username;
     temp.userPoints = userData.customerpoints;
     props.setTotalOrder(temp);
     const goToHome = () => navigate('/login');
@@ -72,6 +73,8 @@ export default function Login(props) {
   let setTotalOrderPass = props.setTotalOrder;
   if (props.totalOrder.userID == "Guest"){
     return (
+      <div>
+            <title>Log in!</title>
       <div className='login-div'>
           <h1>Login to your Panda Express account</h1>
           <br></br>
@@ -117,8 +120,10 @@ export default function Login(props) {
             <br></br>  
           </p>
       </div>
+      </div>
     )
   }
+  
   else{
     return (
       <Navigate to='/'/>

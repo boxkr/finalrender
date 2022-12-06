@@ -55,6 +55,8 @@ export default function Drink() {
   }, []);
 
   return (
+    <div>
+      <title>Drink Menu</title>
     <div className='centered-container'>
         <h1>Any Extras?</h1>
         <div className='top-level-item-render'>
@@ -82,6 +84,7 @@ export default function Drink() {
         <button> {/*just need to add style with tailwind or bootstrap */}
           <Link to="/finalizeOrder" state={neworder}>Next</Link>
         </button>
+    </div>
     </div>
   )
 }

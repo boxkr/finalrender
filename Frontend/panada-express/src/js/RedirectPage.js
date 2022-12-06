@@ -8,6 +8,6 @@ export default function RedirectPage() {
     navigate(currentState.redirectDest, {"state": currentState});
   })
  return (
-    <div> </div>
+    <div></div>
   )
 }

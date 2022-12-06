@@ -86,11 +86,33 @@ export default function FinalizeOrder(props) {
         console.error('Error:', error);
       });
     
+      //if we're a logged in account, we want to add points to our account
+      let pointstoadd = 0;
+      if(global_totalOrder.userID && global_totalOrder.userID != "Guest"){
+
+        console.log("USER FOUND, UPDATING POINTS")
+        //get the points to add, and send it off to the sever route.
+        pointstoadd = (global_totalOrder.totalPrice)*100;
+        console.log("POINTS TO ADD:",pointstoadd);
+        const ptsData = {Username : global_totalOrder.userID, NumPoints: pointstoadd}
+        await fetch(process.env.REACT_APP_BACKEND_URL +'/api/AddUserPoints',{method: "PUT", headers: {'Content-Type': 'application/json',},body: JSON.stringify(ptsData),})
+        .then((data) => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+
+      }
+
       //reset everything
-      let tempTotalOrder = {};
+      let tempTotalOrder = {'orders':[],'serverName':"",'totalPrice': 0,'userID': global_totalOrder.userID, 'userLanguage': "en", 'userPoints':global_totalOrder.userPoints+pointstoadd};
       let tempCurrentOrder = {'entrees' : [], 'extra': "", 'numEntrees': 0, 'numSides': 0, 'price': 0, 'selectionHistory': [], 'sides': [], 'size': "", 'userLanguage': ""};
       props.setCurrentOrder(tempCurrentOrder);
       props.setTotalOrder(tempTotalOrder);
+
+      
+      
 
   }
 
@@ -132,9 +154,10 @@ export default function FinalizeOrder(props) {
         </Translator>
       </div>
   )});
-
+      console.log("PROPS",props);
   return (
-    
+    <div>
+      <title>Finalize your order</title>
     <div className='finalize'>
       <Translator
       to={props.currentOrder.userLanguage}
@@ -159,6 +182,7 @@ export default function FinalizeOrder(props) {
         </p>
         { fullOrderDisplay }
         </Translator> 
+    </div>
     </div>
   )
 }

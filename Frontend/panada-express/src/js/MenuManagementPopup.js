@@ -155,17 +155,17 @@ export default function MenuManagementPopup(props) {
                 </form>
             </div>
             <div>
-            <h2 className='restock-header'>Delete an Item</h2>
-                <form>
-                    <label className='restock-text'>Item to delete: </label>
-                    <input type='text' value={delItem} onChange={(e)=>{setDelItem(e.target.value)}}/>
-                    <input value="Delete Item" type='submit' onClick={handleDelete}/>
-                </form>
+                <h2 className='restock-header'>Delete an Item</h2>
+                    <form>
+                        <label className='restock-text'>Item to delete: </label>
+                        <input type='text' value={delItem} onChange={(e)=>{setDelItem(e.target.value)}}/>
+                        <input value="Delete Item" type='submit' onClick={handleDelete}/>
+                    </form>
             </div>
             {console.log(currentSizes)}
             <div className='sizes-view'>
                 {currentSizes.map((size) => (
-                    <div id={size.name} key={size.id}>
+                    <div className='size-card' id={size.name} key={size.id}>
                         <p className='inventory-item'>{size.name}</p>
                         <p className='inventory-item'>{size.price}</p>
                     </div>

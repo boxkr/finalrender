@@ -118,6 +118,8 @@ export default function Entree(props) {
 
   
   return (
+    <div>
+      <title>Entree</title>
     <div className='centered-container'>
       <Translator
       to={props.currentOrder.userLanguage}
@@ -152,6 +154,7 @@ export default function Entree(props) {
         }
         </p>
         </Translator> 
+    </div>
     </div>
   )
 }
