@@ -144,7 +144,7 @@ export default function FinalizeOrder(props) {
   let fullOrderDisplay = global_totalOrder.orders.map((singleOrder, index1) => {
     console.log(global_totalOrder.orders.length); 
     return (
-      <div class="full-order-display" key={index1}>
+      <div className="full-order-display" key={index1}>
         <Translator
       to={props.currentOrder.userLanguage}
       from='en'
