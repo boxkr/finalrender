@@ -106,6 +106,9 @@ export default function Side(props) {
         .then((response) => response.json())
         .then((data) => setItems(data)); 
   }, []);
+
+  const pictureDict = {"Chow Mein" : "https://s3.amazonaws.com/panda-express-international/Menu/pdp_ChowMein.jpg", "White Rice" : "https://s3.amazonaws.com/panda-express-international/Menu/pdp_SteamRice.jpg", "Fried Rice" : "https://s3.amazonaws.com/panda-express-international/Menu/pdp_FriedRice.jpg"}
+
   return (
     <div>
             <title>Choose a side!></title>
@@ -126,6 +129,7 @@ export default function Side(props) {
                 return (
                   <div id={item.name} className="item-button" onClick={handleItemAdd} key={item.id}>
                     <p className='non-clickable'><Translate>{item.name}</Translate></p>
+                    <img className='non-clickable side-picture' src={pictureDict[item.name]}/>
                   </div>
                   )
               }

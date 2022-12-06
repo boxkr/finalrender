@@ -52,3 +52,33 @@
 .item-text{
     color:white;
 }
+
+.entree-picture{
+    margin-left: auto;
+    padding-right: 100px;
+    width: 200px;
+    height: 100px;
+    float: right;
+    align-self: right;
+    border-radius: 100px;
+}
+
+.side-picture{
+    margin-left: auto;
+    padding-right: 100px;
+    width: 400px;
+    height: 100px;
+    float: right;
+    align-self: right;
+    border-radius: 100px;
+}
+
+.extra-picture {
+    margin-left: auto;
+    padding-right: 100px;
+    width: 200px;
+    height: 100px;
+    float: right;
+    align-self: right;
+    border-radius: 100px;
+}

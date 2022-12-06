@@ -86,6 +86,13 @@ export default function Extra(props) {
   }, []);
 
   console.log(obj);
+
+  const pictureDict = {"Cream Cheese Rangoon" : "https://s3.amazonaws.com/panda-express-international/Menu/thumbnails/grid_Rangoons.jpg",
+  "Crispy Shrimp" : "https://s3.amazonaws.com/panda-express-international/Menu/thumbnails/grid_CrispyShrimp.jpg", 
+  "Veggie Spring Roll" : "https://s3.amazonaws.com/panda-express-international/Menu/thumbnails/grid_SpringRolls.jpg", 
+  "Chicken Egg Roll" : "https://s3.amazonaws.com/panda-express-international/Menu/thumbnails/grid_EggRolls.jpg",
+  "Fountain Drink" : "https://ih1.redbubble.net/image.2518632192.3245/mug,travel,x600,center-pad,600x600,f8f8f8.jpg", "Water Cup":"https://img-cdn.inc.com/image/upload/w_1024,h_576,c_fill/images/panoramic/getty_1283524975_sgbp6n.jpg"}
+
   return (
     <div>
       <title>Extra</title>
@@ -106,6 +113,7 @@ export default function Extra(props) {
                 return (
                   <div id={item.name} className="item-button" onClick={handleItemAdd} key={item.id}>
                     <p className='non-clickable'><Translate>{item.name}</Translate></p>
+                    <img className='non-clickable extra-picture' src={pictureDict[item.name]}/>
                   </div>
                   )
               }

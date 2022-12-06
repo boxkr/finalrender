@@ -37,6 +37,14 @@ export default function FinalizeOrder(props) {
 
   }
 
+  const handleLeave = ()=>{
+    //reset everything
+    let tempTotalOrder = {'orders':[],'serverName':"",'totalPrice': 0,'userID': global_totalOrder.userID, 'userLanguage': "en", 'userPoints':global_totalOrder.userPoints};
+    let tempCurrentOrder = {'entrees' : [], 'extra': "", 'numEntrees': 0, 'numSides': 0, 'price': 0, 'selectionHistory': [], 'sides': [], 'size': "", 'userLanguage': ""};
+    props.setCurrentOrder(tempCurrentOrder);
+    props.setTotalOrder(tempTotalOrder);
+  }
+
   useEffect(() =>{
     addCurrentToTotalOrder();
     forceRefresh(Math.random())
@@ -185,6 +193,9 @@ export default function FinalizeOrder(props) {
         </Link> */}
         <Link className='button-text' onClick={handleFinalize} to="/" /* TODO: Payment page */ ><Button variant="success">
             <Translate>Finalize Order</Translate></Button>
+        </Link>
+        <Link className='button-text' onClick={handleLeave} to="/" /* TODO: Payment page */ ><Button variant="secondary">
+            <Translate>Go back to home</Translate></Button>
         </Link>
         </p>
         { fullOrderDisplay }

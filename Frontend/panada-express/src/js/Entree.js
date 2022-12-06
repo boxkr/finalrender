@@ -116,7 +116,13 @@ export default function Entree(props) {
         .then((data) => setItems(data)); 
   }, []);
 
-  
+  const pictureDict = {"Honey Sesame Chicken" : "https://s3.amazonaws.com/panda-express-international/Canada/HSC_CA.jpg", "Orange Chicken" : "https://s3.amazonaws.com/panda-express-international/Menu/thumbnails/grid_OrangeChicken.jpg",
+  "Shanghai Angus Steak" : "https://s3.amazonaws.com/panda-express-international/Canada/bpasca.jpg", "String Bean Chicken Breast" : "https://s3.amazonaws.com/panda-express-international/Menu/thumbnails/grid_StringBeanChicken.jpg", 
+  "SweetFire Chicken Breast" : "https://s3.amazonaws.com/panda-express-international/Menu/thumbnails/grid_SweetFireChicken.jpg", "Kung Pao Chicken " : "https://s3.amazonaws.com/panda-express-international/Menu/thumbnails/grid_KungPaoChicken.jpg", 
+  "Mushroom Chicken" : "https://s3.amazonaws.com/panda-express-international/Menu/thumbnails/grid_MushroomChicken.jpg", "Black Pepper Chicken" : "https://s3.amazonaws.com/panda-express-international/Menu/thumbnails/grid_BlackPepperChicken.jpg", 
+  "Grilled Teriyaki Chicken" : "https://s3.amazonaws.com/panda-express-international/Menu/thumbnails/grid_TeriyakiChicken.jpg","Broccoli Beef" : "https://s3.amazonaws.com/panda-express-international/Menu/thumbnails/grid_BroccoliBeef.jpg", 
+  "Beijing Beef " : "https://s3.amazonaws.com/panda-express-international/Menu/thumbnails/grid_BeijingBeef.jpg", "Honey Walnut Shrimp" : "https://s3.amazonaws.com/panda-express-international/Menu/thumbnails/grid_HoneyWalnutShrimp.jpg"}
+
   return (
     <div>
       <title>Entree</title>
@@ -136,6 +142,7 @@ export default function Entree(props) {
                 return (
                   <div id={item.name} className="item-button" onClick={handleItemAdd} key={item.id}>
                     <p className='non-clickable'><Translate>{item.name}</Translate></p>
+                    <img className='non-clickable entree-picture' src={pictureDict[item.name]}/>
                   </div>
                   )
               }
