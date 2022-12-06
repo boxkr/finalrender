@@ -18,7 +18,7 @@ export default function Landing(props) {
     console.log(props.totalOrder);
   }, [userLanguage]);
 
-  if (props.totalOrder.userID == "Guest"){
+  if (props.totalOrder.userID == "Guest" || props.totalOrder.userID == ""){
     return(
       <GuestLanding
         userLanguage = {userLanguage}
@@ -28,12 +28,15 @@ export default function Landing(props) {
   }
   else{
     return (
+      <div>
+            <title>Landing Page</title>
       <CustomerLanding
         userLanguage = {userLanguage}
         setUserLanguage = {setUserLanguage}
         totalOrder = {props.totalOrder}
         setTotalOrder = {props.setTotalOrder}
       />
+      </div>
     )
   }
 }

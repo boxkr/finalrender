@@ -30,6 +30,8 @@ export default function LoginStarter(props) {
   })
 
   return (
+    <div>
+      <title>Login Starting Page - Welcome!</title>
       <div className="login-div">
             <h1>I am a...</h1>
             <Link className='button-text' to="/Login"><Button className="starterbtn" variant="primary">
@@ -38,6 +40,7 @@ export default function LoginStarter(props) {
             <Link className='button-text' to="/ManagerLogin"><Button className="starterbtn" variant="primary">
                 <Translate>Manager!</Translate></Button>
             </Link>
+      </div>
       </div>
   )
   

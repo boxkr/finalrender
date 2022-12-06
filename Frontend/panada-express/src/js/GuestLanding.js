@@ -9,6 +9,8 @@ export default function GuestLanding(props){
     const welcome = "Welcome To Panda Express";
     const userLanguage = props.userLanguage;
     return (
+        <div>
+            <title>Landing page for Guests</title>
         <div className="App">
             <ReactLanguageSelect className="language-select"
                 searchable={true}
@@ -39,6 +41,7 @@ export default function GuestLanding(props){
                 </Link>
             </header>
             </Translator>
+        </div>
         </div>
   )
 }

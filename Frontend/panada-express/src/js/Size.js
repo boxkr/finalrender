@@ -86,6 +86,8 @@ export default function Size(props) {
     //Dont ask me why this works but it does
     // let lang = JSON.stringify(userLanguage)[2] + JSON.stringify(userLanguage)[3];
   return (
+    <div>
+    <title>Choose a size!</title>
       <div className='centered-container'>
         <Translator
         from='en'
@@ -116,6 +118,7 @@ export default function Size(props) {
             <Translate>Return to landing page</Translate></Button>
         </Link>
         </Translator>
+    </div>
     </div>
   )
 }

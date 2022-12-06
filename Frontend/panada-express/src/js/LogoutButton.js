@@ -12,12 +12,15 @@ function LogoutButton(props){
     }
 
     return(
+        <div>
+            <title>Logout button</title>
         <div id='singOutButton'>
             <GoogleLogout
                 // clientId={clientID}
                 buttonText={"Logout with Google"}
                 onLogoutSuccess={onSuccess}
             />
+        </div>
         </div>
     )
 }

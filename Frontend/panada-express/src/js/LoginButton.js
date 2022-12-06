@@ -16,6 +16,8 @@ function LoginButton(props){
     }
 
     return(
+        <div>
+            <title>Login button</title>
         <div id = "singInButton">
             <GoogleLogin
                 clientId = {clientID}
@@ -25,6 +27,7 @@ function LoginButton(props){
                 cookiePolicy = {'single_host_origin'}
                 isSignedIn = {true}
             />
+        </div>
         </div>
     )
 }

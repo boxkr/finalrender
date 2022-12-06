@@ -107,6 +107,8 @@ export default function Side(props) {
         .then((data) => setItems(data)); 
   }, []);
   return (
+    <div>
+            <title>Choose a side!></title>
     <div className = 'centered-container'>
       <Translator
       to={props.currentOrder.userLanguage}
@@ -144,6 +146,7 @@ export default function Side(props) {
         <Button onClick={removePreviousSelection}>Bye</Button> */}
         </p>
         </Translator>
+    </div>
     </div>
   )
 }

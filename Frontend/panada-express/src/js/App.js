@@ -43,6 +43,8 @@ function App(props) {
     userPoints: 0
   })
   return (
+    <div>
+    <title>Panda express</title>
     <div className="App">
       {/* <contextContainer.Provider value = {{currentOrder: [currentOrder, setCurrentOrder]}}> */}
         <BrowserRouter>
@@ -160,6 +162,7 @@ function App(props) {
             </Routes>
         </BrowserRouter>
       {/* </contextContainer.Provider> */}
+    </div>
     </div>
   );
 }

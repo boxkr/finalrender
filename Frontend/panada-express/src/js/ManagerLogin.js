@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 
 export default function ManagerLogin() {
   return (
+    <div>
+            <title>Manager Login</title>
     <div className='login-div'>
         <h1>Manager Login</h1>
         <br></br>
@@ -38,6 +40,7 @@ export default function ManagerLogin() {
           <br></br>
           <br></br>
         </p>
+    </div>
     </div>
   )
 }

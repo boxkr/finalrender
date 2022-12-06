@@ -6,6 +6,7 @@ import {Button} from 'react-bootstrap';
 import MenuManagementPopup from './MenuManagementPopup'
 import InventoryManagementPopup from './InventoryManagementPopup'
 import ManagerReportPopup from './ManagerReportPopup'
+import OrderHistoryPopup from './OrderHistory';
 
 export default function Manager() {
 
@@ -13,6 +14,7 @@ export default function Manager() {
     const [menuPopupCounter, setMenuPopupCounter] = useState(1);
     const [inventoryPopupCounter, setInventoryPopupCounter] = useState(1);
     const [reportPopupCounter,setReportPopupCounter] = useState(1);
+    const [historyPopupCounter, setHistoryPopupCounter] = useState(1);
     
 
     
@@ -29,12 +31,17 @@ export default function Manager() {
         setReportPopupCounter(reportPopupCounter+1);
        
     }
+
+    const handleHistoryClick=()=>{
+        setHistoryPopupCounter(historyPopupCounter+1);
+    }
     
     
 
     return (
 
-        
+        <div>
+            <title>Manager home page</title>
         <div className="container">
             <h1 className="welcome"> Welcome Manager! </h1>
             <br></br>
@@ -51,10 +58,17 @@ export default function Manager() {
             <Button variant="primary" size="lg" onClick={handleReportClick   }> {/*just need to add style with tailwind or bootstrap */}
                 Reports
             </Button>
+            
             {(reportPopupCounter % 2 == 0) ? <ManagerReportPopup popupCounter={reportPopupCounter} popCounterFunction={setReportPopupCounter}/> : ""}
+            <br></br>
+            <Button variant="primary" size="lg" onClick={handleHistoryClick   }> {/*just need to add style with tailwind or bootstrap */}
+                Order History
+            </Button>
+            {(historyPopupCounter % 2 == 0) ? <OrderHistoryPopup popupCounter={historyPopupCounter} popCounterFunction={setHistoryPopupCounter}/> : ""}
             <Link className='button-text' to="/"><Button variant="secondary">
             Return to landing page</Button>
           </Link>
+        </div>
         </div>
     )
 }

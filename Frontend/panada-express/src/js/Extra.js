@@ -87,6 +87,8 @@ export default function Extra(props) {
 
   console.log(obj);
   return (
+    <div>
+      <title>Extra</title>
     <div className='centered-container'>
       <Translator
       to={props.currentOrder.userLanguage}
@@ -120,6 +122,7 @@ export default function Extra(props) {
         }
         </p>
     </Translator>
+    </div>
     </div>
   )
 }
