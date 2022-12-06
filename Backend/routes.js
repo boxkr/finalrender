@@ -428,9 +428,14 @@ router.put('/AddUserPoints', function (req, res, next) {
   const {Username,NumPoints} = req.body;
   console.log("BODY",req.body)
   let curpoints = -1;
+  let bad = false;
   //first see how many points they currently have
   client.query("SELECT customerpoints FROM customeraccounts WHERE username=$1", [Username], (error, results)=>{
-    if(error){console.log("ERROR GETTING INITIAL ACCOUNT INTO TO ADD POINTS");throw error;}
+    if(error){console.log("ERROR GETTING INITIAL ACCOUNT INTO TO ADD POINTS"); throw error;}
+    console.log(results);
+    if(results.rows[0] == undefined){ //fail gracefully
+      return;
+    }
     curpoints = results.rows[0].customerpoints;
     console.log(results);
   });
