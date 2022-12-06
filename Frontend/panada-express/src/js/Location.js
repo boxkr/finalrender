@@ -53,6 +53,21 @@ export default function Location() {
         </div>
         <div className='store-info'>
           <h1>Location info</h1>
+          <br></br>
+          <h2>275 Joe Routt Blvd, College Station, TX 77840</h2>
+          <h2>
+            <a href="tel:+19792687570">(979) 268 - 7570</a>
+          </h2>
+          <h3>Hours:</h3>
+          <ul>
+            <li>Sunday: 11AM - 10PM</li>
+            <li>Monday: 11AM - 10PM</li>
+            <li>Tuesday: 11AM - 10PM</li>
+            <li>Wednesday: 11AM - 10PM</li>
+            <li>Thursday: 11AM - 10PM</li>
+            <li>Friday: 11AM - 10PM</li>
+            <li>Saturday: 11AM - 10PM</li>
+          </ul>
         </div>
       </div>
      )
