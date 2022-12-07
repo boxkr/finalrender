@@ -187,6 +187,7 @@ export default function FinalizeOrder(props) {
 
     temp.extra="";
     props.totalOrder.orders.pop();
+    props.totalOrder.totalPrice-=props.currentOrder.price;
     props.setCurrentOrder(temp);
   }
 
