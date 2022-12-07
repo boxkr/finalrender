@@ -55,7 +55,15 @@ export default function OrderHistoryPopup(props) {
     useEffect(()=>{
         fetch(process.env.REACT_APP_BACKEND_URL +"/api/OrderHistoryLast")
             .then((response) => response.json())
-            .then((data) => setOrderHistory(data))
+            .then((data) => setOrderHistory(data.sort((a,b)=>{
+                if(a.id < b.id){
+                    return -1;
+                }else if(a.id > b.id){
+                    return 1;
+                }else{
+                    return 0;
+                }
+            })))
             .then(()=>console.log(orderHistory));
     },[updater])
 
