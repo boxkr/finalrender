@@ -190,8 +190,10 @@ export default function FinalizeOrder(props) {
     props.setCurrentOrder(temp);
   }
 
-  const handleRemoveItem = () => {
-    props.orders.pop();
+  const handleRemoveItem = (index,itemPrice) => {
+    //props.orders.pop();
+    global_totalOrder.orders.splice(index,1);
+    global_totalOrder.totalPrice = global_totalOrder.totalPrice-itemPrice;
   }
   //Get JSX for displaying all items in the order
 
@@ -217,13 +219,14 @@ export default function FinalizeOrder(props) {
         }
         <p key={"etc"}><Translate>{singleOrder.extra}</Translate></p>
         {/* <Button variant="outline-light">Remove {singleOrder.size}</Button>{handleRemoveItem} */}
-        {singleOrder.size != '' && <Link className='button-text' onClick={handleRemoveItem} /* TODO: Payment page */ ><Button variant="outline-light">
+        {singleOrder.size != '' && <Link className='button-text' onClick={()=>handleRemoveItem(index1,singleOrder.price)} /* TODO: Payment page */ ><Button variant="outline-light">
             <Translate>Remove {singleOrder.size}</Translate></Button>
         </Link>}
         </Translator>
       </div>
   )});
       console.log("PROPS",props);
+  let roundedTotal = Math.round(100 * global_totalOrder.totalPrice) / 100;
   return (
     <div>
       <title>Finalize your order</title>
@@ -234,8 +237,8 @@ export default function FinalizeOrder(props) {
       googleApiKey='AIzaSyDFSi6R48DY2waTTn0If0j8tkuqFCtSzHY'
       >
         <h1><Translate>Your Order Summary</Translate></h1>
-        <h2><Translate>Total Price: {totalPrice}</Translate></h2>
-        {props.totalOrder.userID && props.totalOrder.userID != "Guest" && props.totalOrder.userPoints >= 1000 ? <h3 className='points-declare'>With your points you're eligible for half off! New Price: {totalPrice * 0.5}</h3> : ""}
+        <h2><Translate>Total Price: {roundedTotal}</Translate></h2>
+        {props.totalOrder.userID && props.totalOrder.userID != "Guest" && props.totalOrder.userPoints >= 1000 ? <h3 className='points-declare'>With your points you're eligible for half off! New Price: {roundedTotal * 0.5}</h3> : ""}
         {props.totalOrder.userID && props.totalOrder.userID != "Guest" ? <h5>Your points: {props.totalOrder.userPoints}</h5> : ""}
         <p>
         <Link className='button-text' to="/extra" onClick={removePreviousSelection} ><Button variant="primary">
